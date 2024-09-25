@@ -55,6 +55,14 @@ flutter:
     - assets/loginAssets/
     - assets/signUpAssets/
     - assets/splashScreenImg/
+    - assets/notification_settings_assets/
+
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter-Italic-VariableFont_opsz,wght.ttf
+        - asset: assets/fonts/Inter-VariableFont_opsz,wght.ttf
+          weight: 400
 
   
 

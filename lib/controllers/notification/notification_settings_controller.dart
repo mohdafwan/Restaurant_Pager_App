@@ -44,3 +44,4 @@ class NotificationSettingsController extends GetxController {
     _saveSettings();
   }
 }
+

@@ -1,12 +1,12 @@
 // views/ticket_history_page.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:restuarant_pager_app/controllers/notification/notification_settings_controller.dart';
 import 'package:restuarant_pager_app/controllers/tickets/ticket_history_controller.dart';
+import 'package:restuarant_pager_app/views/setting/setting_page.dart';
 import 'package:restuarant_pager_app/widgets/ticket_history_card.dart';
 
-import '../../controllers/notification/notification_settrings_controller.dart';
 import '../notifaicatio/notifaication_view_page.dart';
-import '../notifaicatio/notification_setting_page.dart';
 
 class TicketHistoryPage extends StatelessWidget {
   final TicketHistoryController controller = Get.put(TicketHistoryController());

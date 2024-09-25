@@ -90,7 +90,7 @@ class CustomBottomNavBar extends StatelessWidget {
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           border: Border.all(color: Colors.white, width: 5),
-          color: Color(0xffFE6E39),
+          color: const Color(0xffFE6E39),
         ),
         child: Image.asset("assets/images/scan.png"),
       ),

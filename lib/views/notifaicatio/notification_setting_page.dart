@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:restuarant_pager_app/controllers/notification/notification_settings_controller.dart';
 
-import '../../controllers/notification/notification_settrings_controller.dart';
 
 class SettingsPage extends StatelessWidget {
   final NotificationSettingsController controller =
