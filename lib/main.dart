@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,9 +9,10 @@ import 'package:restuarant_pager_app/firebase/AuthMethods/AuthMethods.dart';
 import 'package:restuarant_pager_app/routes/routes.dart';
 import 'package:restuarant_pager_app/views/splashScreen/splash_screen.dart';
 
-import 'controllers/notification/notification_settings_controller.dart';
+import 'controllers/notification/notification_setting_controller_priyanka.dart';
 import 'firebase/firebase_api.dart';
 import 'firebase_options.dart';
+import 'views/notifaicatio/notification_setting_page_priyanka.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,8 +20,9 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  Get.put(NotificationSettingsController());
+  Get.put(NotificationsSettingsController());
   await FirebaseApi().initNotifications();
+  FirebaseMessaging.onBackgroundMessage(handleBackgroundMessage);
   FirebaseAuth.instance.setLanguageCode('en'); // Set it to the desired locale
 
   // Initialize necessary services
@@ -46,7 +49,7 @@ class MyApp extends StatelessWidget {
             Theme.of(context).textTheme,
           ),
         ),
-        home: const SplashScreen(),
+        home: const NotificationsSettingsPage(),
         getPages: AppRoutes.routes,
       ),
     );
