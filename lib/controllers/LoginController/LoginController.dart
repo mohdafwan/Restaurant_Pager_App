@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:restuarant_pager_app/controllers/UserController/UserController.dart';
@@ -6,8 +5,8 @@ import 'package:restuarant_pager_app/controllers/PhoneNumberController/PhoneNumb
 import 'package:restuarant_pager_app/firebase/AuthMethods/AuthMethods.dart';
 import 'package:restuarant_pager_app/utils/toastMessage.dart';
 import 'package:restuarant_pager_app/views/OTPView/otpPage.dart';
-import 'package:restuarant_pager_app/views/SignUpView/signUpPage.dart';
-import 'package:restuarant_pager_app/views/UpdateNumberDetails/UpdateNumberDetails.dart';
+// import 'package:restuarant_pager_app/views/SignUpView/signUpPage.dart';
+// import 'package:restuarant_pager_app/views/UpdateNumberDetails/UpdateNumberDetails.dart';
 
 class LoginController extends GetxController {
   final _authMethods = Get.find<AuthMethods>();
@@ -36,20 +35,20 @@ class LoginController extends GetxController {
     debugPrint("inside phone sign in");
     if (isButtonDisabled) return;
     Get.to(() => OtpPageView(onVerified: () async {
-          final res = await _authMethods.getUserWithUid(uid: userController.uid!);
-          if (res.message == "success") {
-            userController.setUser(res.data);
-            // go to home screen
-            Get.offNamed('/dashboard');
-          } else if (res.message == "user not found") {
-            Get.off(() => const SignUpPage());
-          } else {
-            debugPrint("phone sign in error : ${res.message}");
-            if (context.mounted) {
-              showToastMessage(context, res.message!);
-            }
-            userController.clearUserData();
-          }
+          // final res = await _authMethods.getUserWithUid(uid: userController.uid!);
+          // if (res.message == "success") {
+          //   userController.setUser(res.data);
+          //   // go to home screen
+          //   Get.offNamed('/dashboard');
+          // } else if (res.message == "user not found") {
+          //   Get.off(() => const SignUpPage());
+          // } else {
+          //   debugPrint("phone sign in error : ${res.message}");
+          //   if (context.mounted) {
+          //     showToastMessage(context, res.message!);
+          //   }
+          //   userController.clearUserData();
+          // }
         },
       ),
     );
@@ -57,20 +56,19 @@ class LoginController extends GetxController {
   void googleSignIn(BuildContext context) async {
     debugPrint("inside google sign in");
     final res = await _authMethods.signInWithGoogle();
-    if (res.message == "success") {
-      User user = res.data;
-        userController.updateUserDetails(uid: user.uid,email: user.email);
-        final res2 = await _authMethods.getUserWithUid(uid: user.uid);
-        if (res2.message == "user not found") {
-          Get.to(() => const UpdateNumberDetails(title: "Add Phone Number"));
-        } else if(res2.message == "success") {
-          userController.setUser(res2.data);
-          // go to home screen
-          Get.offNamed('/dashboard');
-        }else{
-          debugPrint("google sign in error : ${res2.message}");
-        }
-    } else {
+    // if (res.message == "success") {
+    //     final res2 = await _authMethods.getUserWithUid(uid: userController.uid!);
+    //     if (res2.message == "user not found") {
+    //       Get.to(() => const UpdateNumberDetails(title: "Add Phone Number"));
+    //     } else if(res2.message == "success") {
+    //       userController.setUser(res2.data);
+    //       // go to home screen
+    //       Get.offNamed('/dashboard');
+    //     }else{
+    //       debugPrint("google sign in error : ${res2.message}");
+    //     }
+    // } 
+    if(res.message != "success") {
       debugPrint("google sign in error : ${res.message}");
       if(context.mounted){
         showToastMessage(context, res.message!); // we can also show snack bar if it preferred
