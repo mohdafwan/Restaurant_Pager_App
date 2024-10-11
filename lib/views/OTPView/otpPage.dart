@@ -134,10 +134,12 @@ class _OtpPageViewState extends State<OtpPageView> {
               width: 272,
               child: Button(
                 onPressed: (){
-                  setState(() {
-                    clicked = true;
-                  });
-                  otpController.validatePhoneOTP();
+                  // TODO: After verify the account then route to /dashboard 
+                  Get.offNamed("/dashboard");
+                  // setState(() { 
+                  //   clicked = true;
+                  // });
+                  // otpController.validatePhoneOTP();
                 },
                 text: "Verify",
                 disable: clicked,
