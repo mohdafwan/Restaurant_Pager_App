@@ -22,13 +22,13 @@ void main() async {
 
   Get.put(NotificationSettingsController());
   await FirebaseApi().initNotifications();
-  FirebaseAuth.instance.setLanguageCode('en'); 
-  Get.put(AuthMethods(),permanent: true);
+  FirebaseAuth.instance.setLanguageCode('en');
+  Get.put(AuthMethods(), permanent: true);
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key}); 
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
