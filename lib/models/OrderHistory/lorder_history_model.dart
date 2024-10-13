@@ -9,12 +9,12 @@ class Order {
   // Sample data
   static List<Order> getOrderItems() {
     return [
-      Order("KFC", "Today", "assets/homeImg/home_refer.png", "Ready to pickup"),
-      Order("Café Coffee Day", "Today", "assets/homeImg/home_refer.png",
+      Order("KFC", "Today", "assets/historyimages/1.png", "Ready to pickup"),
+      Order("Café Coffee Day", "Today", "assets/historyimages/2.png",
           "Preparing"),
-      Order("McDonald's", "Yesterday", "assets/homeImg/home_refer.png",
+      Order("McDonald's", "Yesterday", "assets/historyimages/3.png",
           "Delivered"),
-      Order("Domino's Pizza", "Last week", "assets/homeImg/home_refer.png",
+      Order("Madras Coffee House", "Last week", "assets/historyimages/5.png",
           "Delivered"),
     ];
   }

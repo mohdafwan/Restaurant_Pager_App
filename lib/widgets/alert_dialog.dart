@@ -7,6 +7,7 @@ class ReusableAlertDialog extends StatelessWidget {
   final VoidCallback? onYesPressed;
   final VoidCallback? onNoPressed;
   final String yesButtonText;
+  final double? sizex;
   final String noButtonText;
   final Color? backgroundColor;
 
@@ -16,6 +17,7 @@ class ReusableAlertDialog extends StatelessWidget {
     required this.icon,
     this.subtitle,
     this.onYesPressed,
+    this.sizex,
     this.onNoPressed,
     this.yesButtonText = 'Yes',
     this.noButtonText = 'No',
@@ -48,8 +50,8 @@ class ReusableAlertDialog extends StatelessWidget {
                     const SizedBox(width: 8),
                     Text(
                       title,
-                      style: const TextStyle(
-                        fontSize: 18,
+                      style: TextStyle(
+                        fontSize: sizex ?? 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

@@ -6,13 +6,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:restuarant_pager_app/constants/color_palette.dart';
 import 'package:restuarant_pager_app/firebase/AuthMethods/AuthMethods.dart';
 import 'package:restuarant_pager_app/routes/routes.dart';
-import 'package:restuarant_pager_app/views/main_screens/home_screen/home_screen.dart';
-import 'package:restuarant_pager_app/views/pages/dashboard/dashboard.dart';
 import 'package:restuarant_pager_app/views/splashScreen/splash_screen.dart';
-import 'package:restuarant_pager_app/views/tickets/raise_ticket.dart';
 import 'controllers/notification/notification_settrings_controller.dart';
 import 'firebase/firebase_api.dart';
 import 'firebase_options.dart';
+
+
+
+/// Check out the [AppRoutes.routes] for more details. some pages are commented out
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -52,3 +53,5 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+

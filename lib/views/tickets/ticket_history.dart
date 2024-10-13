@@ -6,7 +6,6 @@ import 'package:restuarant_pager_app/widgets/ticket_history_card.dart';
 
 import '../../controllers/notification/notification_settrings_controller.dart';
 import '../notifaicatio/notifaication_view_page.dart';
-import '../notifaicatio/notification_setting_page.dart';
 
 class TicketHistoryPage extends StatelessWidget {
   final TicketController controller = Get.put(TicketController());
@@ -20,7 +19,7 @@ class TicketHistoryPage extends StatelessWidget {
         backgroundColor: Color(0xfff7f9fa),
         appBar: AppBar(
           backgroundColor: Color(0xfff7f9fa),
-          title: Text(
+          title: const Text(
             'Ticket history',
             style: TextStyle(fontWeight: FontWeight.w700),
           ),
@@ -32,9 +31,10 @@ class TicketHistoryPage extends StatelessWidget {
           actions: [
             //add settings page
             IconButton(
-              icon: Icon(Icons.settings),
+              icon:const Icon(Icons.settings),
               onPressed: () {
-                Get.to(() => SettingsPage());
+                //TODO: Get.to(() => SettingsPage()); sync with the pages
+                // Get.to(() => SettingsPage());
               },
             ),
             IconButton(

@@ -12,7 +12,7 @@ import 'package:encrypt/encrypt.dart' as encrypt;
 class ScannerScreen extends StatelessWidget {
   final QRCodeController qrCodeController = Get.put(QRCodeController());
 
-  ScannerScreen() {
+  ScannerScreen({super.key}) {
     qrCodeController.fetchCurrentUserDetails();
   }
 
@@ -20,7 +20,8 @@ class ScannerScreen extends StatelessWidget {
 
   // Encrypt the user data
   String encryptData(String data, String apiKey) {
-    final key = encrypt.Key.fromUtf8(apiKey.padRight(32, '0')); // Ensure 32 chars
+    final key =
+        encrypt.Key.fromUtf8(apiKey.padRight(32, '0')); // Ensure 32 chars
     final iv = encrypt.IV.fromLength(16); // 16-byte initialization vector
     final encrypter = encrypt.Encrypter(encrypt.AES(key));
     final encrypted = encrypter.encrypt(data, iv: iv);
@@ -28,7 +29,8 @@ class ScannerScreen extends StatelessWidget {
   }
 
   // Generate QR code data with encrypted user info
-  String generateQrCodeData(String name, String email, String phone, String apiKey) {
+  String generateQrCodeData(
+      String name, String email, String phone, String apiKey) {
     final data = jsonEncode({
       'name': name,
       'email': email,
@@ -41,7 +43,7 @@ class ScannerScreen extends StatelessWidget {
   Future<void> _saveQrCodeToGallery(GlobalKey key) async {
     try {
       RenderRepaintBoundary boundary =
-      key.currentContext!.findRenderObject() as RenderRepaintBoundary;
+          key.currentContext!.findRenderObject() as RenderRepaintBoundary;
       final image = await boundary.toImage(pixelRatio: 3.0);
       final byteData = await image.toByteData(format: ImageByteFormat.png);
       final Uint8List pngBytes = byteData!.buffer.asUint8List();
@@ -59,10 +61,10 @@ class ScannerScreen extends StatelessWidget {
     GlobalKey _qrKey = GlobalKey();
 
     return Scaffold(
-      backgroundColor: Color(0xfff7f9fa),
+      backgroundColor:const Color(0xfff7f9fa),
       appBar: AppBar(
-        backgroundColor: Color(0xfff7f9fa),
-        leading: const Icon(Icons.arrow_back),
+        backgroundColor:const Color(0xfff7f9fa),
+        
         centerTitle: true,
         title: const Text(
           "Scan the QR Code",
@@ -82,7 +84,7 @@ class ScannerScreen extends StatelessWidget {
           color: Colors.white,
           child: Obx(() {
             if (qrCodeController.userName.value.isEmpty) {
-              return CircularProgressIndicator(); // Show a loading indicator
+              return const CircularProgressIndicator(); // Show a loading indicator
             } else {
               // Generate encrypted data for QR code
               String encryptedData = generateQrCodeData(
@@ -101,9 +103,10 @@ class ScannerScreen extends StatelessWidget {
                       qrCodeController.userName.value.isNotEmpty
                           ? qrCodeController.userName.value
                           : "User Name",
-                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     // Display the QR code with encrypted data
                     QrImageView(
                       data: encryptedData,
@@ -111,17 +114,17 @@ class ScannerScreen extends StatelessWidget {
                       size: 200.0,
                       gapless: false,
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Text(
                       "ID: ${qrCodeController.userId.value}",
                       style: TextStyle(fontSize: 20),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: () {
                         // Add functionality to share the QR code or perform any action
                       },
-                      child: Text("Share this QR Code"),
+                      child:const Text("Share this QR Code"),
                     ),
                   ],
                 ),

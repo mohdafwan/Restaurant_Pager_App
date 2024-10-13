@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:restuarant_pager_app/views/tickets/raise_ticket.dart';
 
 import '../../widgets/alert_dialog.dart';
 import 'components/setting_group.dart';
 import 'components/setting_tile.dart';
 
-class SettingsPage extends StatelessWidget {
-  const SettingsPage({super.key});
+class SettingsPagex extends StatelessWidget {
+  const SettingsPagex({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        title: const Center(
-            child: Text(
+        centerTitle: false,
+        backgroundColor: Colors.white,
+        title: const Text(
           'Settings',
-          style: TextStyle(fontWeight: FontWeight.w500),
-        )),
+          style: TextStyle(fontWeight: FontWeight.w900, fontSize: 24),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -44,7 +46,7 @@ class SettingsPage extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 20),
-            const SettingsGroup(
+            SettingsGroup(
               settingsGroupTitle: 'More',
               items: [
                 SettingTile(
@@ -60,7 +62,11 @@ class SettingsPage extends StatelessWidget {
                 SettingTile(
                   title: 'Raise Ticket',
                   icon: Icons.airplane_ticket_outlined,
-                  // onTap: () => Get.to(() => RaiseTicketPage()),
+                  // onTap: () => Get.to(() => RaiseTicketPage()),/submitissue
+                  onTap: () {
+                    Get.toNamed('/onsettingsubmitissue');
+                    
+                  },
                 ),
               ],
             ),
@@ -68,12 +74,15 @@ class SettingsPage extends StatelessWidget {
             Center(
               child: TextButton(
                 onPressed: () {
-                  // Handle logout action
-                  //show a aleart dialog box for confrmation
                   showCustomAlertDialog(context);
                 },
-                child: const Text('Log Out',
-                    style: TextStyle(fontSize: 14, color: Colors.grey)),
+                child: Padding(
+                  padding: const EdgeInsets.all(0).copyWith(bottom: 10),
+                  child: const Text(
+                    'Log Out',
+                    style: TextStyle(fontSize: 22, color: Colors.grey),
+                  ),
+                ),
               ),
             ),
           ],

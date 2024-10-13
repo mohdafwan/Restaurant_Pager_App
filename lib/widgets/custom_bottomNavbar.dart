@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:restuarant_pager_app/views/main_screens/scanner_screen/scanner_screen.dart';
 class CustomBottomNavBar extends StatelessWidget {
   final int selectedIndex;
   final Function(int) onItemTapped;
@@ -80,8 +79,7 @@ class CustomBottomNavBar extends StatelessWidget {
   Widget _buildScannerButton() {
     return GestureDetector(
       onTap: () {
-        Get.to(ScannerScreen());
-        print("object");
+       Get.toNamed("/scanner");
       },
       child: Container(
         clipBehavior: Clip.antiAliasWithSaveLayer,

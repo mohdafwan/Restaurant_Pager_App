@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:restuarant_pager_app/controllers/dashboard_controller/dashboard_controller.dart';
 import 'package:restuarant_pager_app/controllers/pages_controller/home_controller/home_controller.dart';
-import 'package:restuarant_pager_app/views/main_screens/history_screen/history_screen.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:logger/logger.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,6 +13,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  var logger = Logger();
   CurrentOrderController currentOrders = Get.put(CurrentOrderController());
 
   @override
@@ -31,11 +33,16 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         centerTitle: false,
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 16),
-            child: CircleAvatar(
-              child: Icon(Icons.person),
+        actions: [
+          GestureDetector(
+            onTap: () {
+              Get.find<DashboardController>().changeTabIndex(2);
+            },
+            child: const Padding(
+              padding: EdgeInsets.only(right: 16),
+              child: CircleAvatar(
+                child: Icon(Icons.person),
+              ),
             ),
           )
         ],
@@ -51,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               const Row(
                 children: [
-                  const Text(
+                  Text(
                     "Current order status",
                     style: TextStyle(
                         fontSize: 16,
@@ -111,23 +118,27 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 12.0),
                 child: InkWell(
                   onTap: () {
-                    Get.to(() => OrderHistoryView());
+                    Get.toNamed("/orderview");
                   },
                   child: Container(
                     width: double.infinity * 0.6,
                     height: 39,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
+                        borderRadius: BorderRadius.circular(8),
                         border: Border.all(
                           color: const Color(0xffFC440E),
                           width: 1,
                         )),
                     child: const Center(
-                        child: Text("View order history",
-                            style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xffFC440E)))),
+                      child: Text(
+                        "View order history",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xffFC440E),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -147,10 +158,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           fontWeight: FontWeight.w600,
                           color: Color(0xff090A0A)),
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 5),
                     InkWell(
                       //Setting page route
-                      onTap: () {},
+                      onTap: () {
+                       Get.toNamed("/onsettingnotification");
+                      },
                       child: const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -185,15 +198,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     width: double.infinity,
                     height: 117,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: const Color(0xffFFF4ED),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.black.withOpacity(0.25),
-                              offset: const Offset(0, 4),
-                              blurRadius: 8.98,
-                              spreadRadius: 0)
-                        ]),
+                      borderRadius: BorderRadius.circular(20),
+                      color: const Color(0xffFFF4ED),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.25),
+                          offset: const Offset(0, 4),
+                          blurRadius: 8.98,
+                          spreadRadius: 0,
+                        )
+                      ],
+                    ),
                   ),
                   Row(
                     children: [
@@ -272,8 +287,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         const Padding(
                           padding: EdgeInsets.only(right: 12.0),
                           child: Image(
-                              image:
-                                  AssetImage("assets/homeImg/home_refer.png")),
+                            image: AssetImage(
+                              "assets/homeImages/referfriendimage.png",
+                            ),
+                          ),
                         )
                       ],
                     ),

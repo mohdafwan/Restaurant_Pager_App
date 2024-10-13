@@ -16,8 +16,15 @@ class SettingTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: onTap,
-      leading: Icon(
-        icon,
+      leading: Container(
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(40),
+          color: const Color(0xffFFEFE4),
+        ),
+        child: Icon(
+          icon,
+        ),
       ),
       title: Text(
         title,
@@ -26,10 +33,11 @@ class SettingTile extends StatelessWidget {
           fontWeight: FontWeight.w500,
         ),
       ),
-      trailing: const Icon(
-        Icons.arrow_forward_ios_rounded,
-        size: 20,
-      ),
+      trailing: 
+        const Icon(
+          Icons.arrow_forward_ios_rounded,
+          size: 20,
+        ),
       contentPadding: EdgeInsets.zero,
       minVerticalPadding: 0,
     );

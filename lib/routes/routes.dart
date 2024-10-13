@@ -1,13 +1,19 @@
 import 'package:get/get.dart';
 import 'package:restuarant_pager_app/views/LoginView/loginPage.dart';
 import 'package:restuarant_pager_app/views/SignUpView/signUpPage.dart';
+import 'package:restuarant_pager_app/views/main_screens/history_screen/history_screen.dart';
+import 'package:restuarant_pager_app/views/main_screens/scanner_screen/scanner_screen.dart';
+import 'package:restuarant_pager_app/views/notifaicatio/notification_screen_page.dart';
 import 'package:restuarant_pager_app/views/pages/dashboard/dashboard.dart';
 import 'package:restuarant_pager_app/views/pages/dashboard/dashboard_binding.dart';
 import 'package:restuarant_pager_app/views/pages/onboarding/boarding_screen.dart';
+import 'package:restuarant_pager_app/views/setting/setting_page.dart';
+import 'package:restuarant_pager_app/views/tickets/raise_ticket.dart';
 
 class AppRoutes {
   static final routes = [
     GetPage(
+      transition: Transition.fadeIn,
       name: '/boarding_screens',
       page: () => BoardingScreen(),
     ),
@@ -24,5 +30,51 @@ class AppRoutes {
       page: () => const Dashboard(),
       binding: DashboardBinding(),
     ),
+    GetPage(
+      name: '/scanner',
+      page: () => ScannerScreen(),
+      transition: Transition.downToUp,
+      transitionDuration: const Duration(milliseconds: 300),
+    ),
+    GetPage(
+      name: '/orderview',
+      page: () => OrderHistoryView(),
+      transition: Transition.rightToLeft,
+      transitionDuration: const Duration(milliseconds: 250),
+    ),
+    GetPage(
+      name: '/appsetting',
+      page: () => const SettingsPagex(),
+      transition: Transition.rightToLeft,
+      transitionDuration: const Duration(milliseconds: 250),
+    ),
+    GetPage(
+      name: '/onsettingsubmitissue',
+      transition: Transition.rightToLeft,
+      transitionDuration: const Duration(milliseconds: 250),
+      page: () => const SubmitIssuePage(),
+    ),
+    // GetPage(
+    //   name: '/onsettingprofile',
+    //   page: () => const (),
+    // ),
+    // GetPage(
+    //   name: '/onsettingpassword',
+    //   page: () => const (),
+    // ),
+    GetPage(
+      name: '/onsettingnotification',
+      page: () => NotificationsSettingsPage(),
+      transition: Transition.rightToLeft,
+      transitionDuration: const Duration(milliseconds: 250),
+    ),
+    // GetPage(
+    //   name: '/onsettingrate&review',
+    //   page: () => const (),
+    // ),
+    // GetPage(
+    //   name: '/onsettinghelp',
+    //   page: () => const (),
+    // ),
   ];
 }
