@@ -25,23 +25,29 @@ class SettingsPagex extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SettingsGroup(
+             SettingsGroup(
               settingsGroupTitle: 'Account',
               items: [
                 SettingTile(
                   title: 'Profile',
                   icon: Icons.person_outline_rounded,
-                  // onTap: () => Get.to(() => ProfilePage()),
+                  onTap: () {
+                    Get.toNamed('/onsettingprofile');
+                  },
                 ),
                 SettingTile(
                   title: 'Password',
                   icon: Icons.lock_outline_rounded,
-                  // onTap: () => Get.to(() => PasswordPage()),
+                   onTap: () {
+                    Get.toNamed('/onsettingpasswordreset');
+                  },
                 ),
                 SettingTile(
                   title: 'Notification',
                   icon: Icons.notifications_none_rounded,
-                  // onTap: () => Get.to(() => NotificationPage()),
+                   onTap: () {
+                    Get.toNamed('/onsettingprofile');
+                  },
                 ),
               ],
             ),
@@ -52,20 +58,22 @@ class SettingsPagex extends StatelessWidget {
                 SettingTile(
                   title: 'Rate & Review',
                   icon: Icons.star_border_rounded,
-                  // onTap: () => Get.to(() => RateReviewPage()),
+                  onTap: () {
+                    Get.toNamed('/onsettingrate&review');
+                  },
                 ),
                 SettingTile(
                   title: 'Help',
                   icon: Icons.help_outline_rounded,
-                  // onTap: () => Get.to(() => HelpPage()),
+                  onTap: () {
+                    Get.toNamed('/onsettinghelp');
+                  },
                 ),
                 SettingTile(
                   title: 'Raise Ticket',
                   icon: Icons.airplane_ticket_outlined,
-                  // onTap: () => Get.to(() => RaiseTicketPage()),/submitissue
                   onTap: () {
                     Get.toNamed('/onsettingsubmitissue');
-                    
                   },
                 ),
               ],

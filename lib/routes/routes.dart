@@ -36,7 +36,7 @@ class AppRoutes {
       transition: Transition.downToUp,
       transitionDuration: const Duration(milliseconds: 300),
     ),
-    GetPage(
+     GetPage(
       name: '/orderview',
       page: () => OrderHistoryView(),
       transition: Transition.rightToLeft,
@@ -48,18 +48,14 @@ class AppRoutes {
       transition: Transition.rightToLeft,
       transitionDuration: const Duration(milliseconds: 250),
     ),
-    GetPage(
-      name: '/onsettingsubmitissue',
-      transition: Transition.rightToLeft,
-      transitionDuration: const Duration(milliseconds: 250),
-      page: () => const SubmitIssuePage(),
-    ),
+    
+    // ----------SettingScreen Routes
     // GetPage(
     //   name: '/onsettingprofile',
     //   page: () => const (),
     // ),
     // GetPage(
-    //   name: '/onsettingpassword',
+    //   name: '/onsettingpasswordreset',
     //   page: () => const (),
     // ),
     GetPage(
@@ -76,5 +72,12 @@ class AppRoutes {
     //   name: '/onsettinghelp',
     //   page: () => const (),
     // ),
+    GetPage(
+      name: '/onsettingsubmitissue',
+      transition: Transition.rightToLeft,
+      transitionDuration: const Duration(milliseconds: 250),
+      page: () => const SubmitIssuePage(),
+    ),
+    
   ];
 }
