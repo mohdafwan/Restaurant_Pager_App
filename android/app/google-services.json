@@ -1,58 +1,35 @@
 {
   "project_info": {
-    "project_number": "163216286673",
-    "firebase_url": "https://restuarantpager-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "project_id": "restuarantpager",
-    "storage_bucket": "restuarantpager.appspot.com"
+    "project_number": "959984253746",
+    "firebase_url": "https://resturantpager-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "resturantpager",
+    "storage_bucket": "resturantpager.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:163216286673:android:32ad41afdc0e181c7ab6f0",
+        "mobilesdk_app_id": "1:959984253746:android:44071b3f9766f479c6352b",
         "android_client_info": {
           "package_name": "com.example.restuarant_pager_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "163216286673-kpgbshk4mkfoiiiede0l3nrcor5ecdb6.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.restuarant_pager_app",
-            "certificate_hash": "8bafc3bdffcc746ec2246662d7533e8491566609"
-          }
-        },
-        {
-          "client_id": "163216286673-miul1pa0rk25gis72h2b0hju2i8fem5v.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.restuarant_pager_app",
-            "certificate_hash": "c94648861ed5ce0339831f53f50e354edbf4ecdc"
-          }
-        },
-        {
-          "client_id": "163216286673-4e7f55r96ksmmc3lq6pekq6vcp39eotg.apps.googleusercontent.com",
+          "client_id": "959984253746-nsj9k65ems02lj9no7fjfijuhous5llr.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAgW0Ue-GUIXhoVb5UPXaMrWt_cTlrsrOk"
+          "current_key": "AIzaSyA0GQF-wQsjib5soErL3a98RxI3VAcCpPA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "163216286673-4e7f55r96ksmmc3lq6pekq6vcp39eotg.apps.googleusercontent.com",
+              "client_id": "959984253746-nsj9k65ems02lj9no7fjfijuhous5llr.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "163216286673-fg2sbeg56m99cqaoveau6nkfuotvegij.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.restuarantPagerApp"
-              }
             }
           ]
         }

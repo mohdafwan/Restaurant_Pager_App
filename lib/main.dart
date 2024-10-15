@@ -9,7 +9,7 @@ import 'package:restuarant_pager_app/routes/routes.dart';
 import 'package:restuarant_pager_app/views/splashScreen/splash_screen.dart';
 import 'controllers/notification/notification_settrings_controller.dart';
 import 'firebase/firebase_api.dart';
-import 'firebase_options.dart';
+import 'firebase_options2.dart';
 
 
 
