@@ -1,8 +1,6 @@
 // views/widgets/ticket_item.dart
 import 'package:flutter/material.dart';
-import 'package:get/get_common/get_reset.dart';
 import 'package:restuarant_pager_app/models/tickets/ticket_model.dart';
-import 'package:restuarant_pager_app/views/EditProfileView/components/EditProfileNameField.dart';
 
 class TicketItem extends StatelessWidget {
   final Ticket ticket;
