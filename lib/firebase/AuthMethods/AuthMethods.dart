@@ -180,6 +180,7 @@ class AuthMethods {
 
       if (response.statusCode == 201) {
         loggedIn = true;
+        userController.updateUserDetails(id: response.data['id']);
         res = "success";
       } else {
         res = response.statusMessage ?? res;
