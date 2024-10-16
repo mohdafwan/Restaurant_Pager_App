@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:restuarant_pager_app/views/tickets/raise_ticket.dart';
-
+import 'package:restuarant_pager_app/controllers/dashboard_controller/dashboard_controller.dart';
 import '../../widgets/alert_dialog.dart';
 import 'components/setting_group.dart';
 import 'components/setting_tile.dart';
@@ -32,7 +31,7 @@ class SettingsPagex extends StatelessWidget {
                   title: 'Profile',
                   icon: Icons.person_outline_rounded,
                   onTap: () {
-                    Get.toNamed('/onsettingprofile');
+                    Get.find<DashboardController>().changeTabIndex(3);
                   },
                 ),
                 SettingTile(
@@ -46,7 +45,7 @@ class SettingsPagex extends StatelessWidget {
                   title: 'Notification',
                   icon: Icons.notifications_none_rounded,
                    onTap: () {
-                    Get.toNamed('/onsettingprofile');
+                    Get.toNamed("/onsettingnotification");
                   },
                 ),
               ],
@@ -73,7 +72,7 @@ class SettingsPagex extends StatelessWidget {
                   title: 'Raise Ticket',
                   icon: Icons.airplane_ticket_outlined,
                   onTap: () {
-                    Get.toNamed('/onsettingsubmitissue');
+                    Get.find<DashboardController>().changeTabIndex(5);
                   },
                 ),
               ],
