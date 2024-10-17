@@ -24,6 +24,7 @@ class EditProfileController extends GetxController {
       model?.gender = userController.gender;
       model?.email = userController.email;
       model?.profilePic = userController.profilePic;
+      model?.phoneNumber = userController.currentUser.value.phone;
     });
   }
 

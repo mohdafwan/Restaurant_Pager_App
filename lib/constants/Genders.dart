@@ -1,1 +1,1 @@
-const List<String> genders = ["Male", "Female", "Other","Prefer not to disclose"];
+const List<String> genders = ["male", "female", "other","prefer not to disclose"];
