@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:restuarant_pager_app/controllers/dashboard_controller/dashboard_controller.dart';
 import '../../controllers/tickets/raise_ticket.dart';
 import '../../utils/imagePicker.dart';
 import '../../widgets/textfield.dart';
@@ -32,6 +34,10 @@ class _SubmitIssuePageState extends State<SubmitIssuePage> {
         title: const Text(
           'Submit an Issue',
           style: TextStyle(fontWeight: FontWeight.w700),
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => Get.find<DashboardController>().changeTabIndex(2),
         ),
         centerTitle: true,
       ),
@@ -110,7 +116,8 @@ class _SubmitIssuePageState extends State<SubmitIssuePage> {
                   ),
                 ],
               ),
-              const SizedBox(height: 24), // Space between fields and description
+              const SizedBox(
+                  height: 24), // Space between fields and description
               CustomTextField(
                 label: 'Description',
                 hint: 'Describe the issue in detail',
@@ -135,81 +142,91 @@ class _SubmitIssuePageState extends State<SubmitIssuePage> {
               isLoading
                   ? const CircularProgressIndicator()
                   : SizedBox(
-                width: double.infinity,
-                child: TextButton(
-                  onPressed: () async {
-                    // Make sure form fields are not empty
-                    if (firstNameController.text.isEmpty ||
-                        lastNameController.text.isEmpty ||
-                        emailController.text.isEmpty ||
-                        descriptionController.text.isEmpty) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Please fill all mandatory fields'),
-                        ),
-                      );
-                      return;
-                    }
-        
-                    setState(() {
-                      isLoading = true;
-                    });
-        
-                    try {
-                      // Fill the ticket data in the controller
-                      issueTicketController.ticket.firstName = firstNameController.text;
-                      issueTicketController.ticket.lastName = lastNameController.text;
-                      issueTicketController.ticket.email = emailController.text;
-                      issueTicketController.ticket.selectedOrder = selectOrderController.text;
-                      issueTicketController.ticket.description = descriptionController.text;
-                      issueTicketController.attachedFile = attachedFile;
-                      // Submit ticket
-                      bool post= await issueTicketController.submitTicket(context);
-                      if (post) {
-                        // Show success dialog with ticket ID
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return TicketSubmitPopup(ticketId: issueTicketController.ticketId); // Pass the ticket ID
-                          },
-                        );
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Ticket submission failed'),
+                      width: double.infinity,
+                      child: TextButton(
+                        onPressed: () async {
+                          // Make sure form fields are not empty
+                          if (firstNameController.text.isEmpty ||
+                              lastNameController.text.isEmpty ||
+                              emailController.text.isEmpty ||
+                              descriptionController.text.isEmpty) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content:
+                                    Text('Please fill all mandatory fields'),
+                              ),
+                            );
+                            return;
+                          }
+
+                          setState(() {
+                            isLoading = true;
+                          });
+
+                          try {
+                            // Fill the ticket data in the controller
+                            issueTicketController.ticket.firstName =
+                                firstNameController.text;
+                            issueTicketController.ticket.lastName =
+                                lastNameController.text;
+                            issueTicketController.ticket.email =
+                                emailController.text;
+                            issueTicketController.ticket.selectedOrder =
+                                selectOrderController.text;
+                            issueTicketController.ticket.description =
+                                descriptionController.text;
+                            issueTicketController.attachedFile = attachedFile;
+                            // Submit ticket
+                            bool post = await issueTicketController
+                                .submitTicket(context);
+                            if (post) {
+                              // Show success dialog with ticket ID
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return TicketSubmitPopup(
+                                      ticketId: issueTicketController
+                                          .ticketId); // Pass the ticket ID
+                                },
+                              );
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Ticket submission failed'),
+                                ),
+                              );
+                            }
+                          } catch (error) {
+                            // Handle submission error
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Submission failed: $error'),
+                              ),
+                            );
+                          } finally {
+                            setState(() {
+                              isLoading = false;
+                            });
+                          }
+                        },
+                        style: TextButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 15.0, horizontal: 30.0),
+                          textStyle: const TextStyle(fontSize: 16),
+                          backgroundColor: Colors.black,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0),
                           ),
-                        );
-                      }
-                    } catch (error) {
-                      // Handle submission error
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('Submission failed: $error'),
                         ),
-                      );
-                    } finally {
-                      setState(() {
-                        isLoading = false;
-                      });
-                    }
-                  },
-                  style: TextButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 30.0),
-                    textStyle: const TextStyle(fontSize: 16),
-                    backgroundColor: Colors.black,
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
+                        child: const Text(
+                          'Submit Ticket',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                  child: const Text(
-                    'Submit Ticket',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
             ],
           ),
         ),

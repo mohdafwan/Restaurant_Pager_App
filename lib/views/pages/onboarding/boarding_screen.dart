@@ -45,7 +45,7 @@ class BoardingScreen extends StatelessWidget {
                   Obx(() => Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: _buildPageIndicator(controller),
-                      )),
+                      ),),
                   SizedBox(
                     width: 273,
                     height: 102,
@@ -57,7 +57,10 @@ class BoardingScreen extends StatelessWidget {
                     ),
                   ),
                   GestureDetector(
-                    onTap: controller.nextPage, // Move to the next page
+                    onTap: (){
+                      controller.nextPage();
+                      // Get.offAllNamed('/dashboard');
+                    }, // Move to the next page
                     child: Container(
                       width: 283,
                       height: 44,

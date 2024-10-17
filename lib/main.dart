@@ -11,10 +11,6 @@ import 'controllers/notification/notification_settrings_controller.dart';
 import 'firebase/firebase_api.dart';
 import 'firebase_options2.dart';
 
-
-
-/// Check out the [AppRoutes.routes] for more details. some pages are commented out
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(

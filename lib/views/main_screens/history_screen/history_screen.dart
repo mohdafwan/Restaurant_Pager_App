@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,17 +27,34 @@ class OrderHistoryView extends StatelessWidget {
               fontWeight: FontWeight.w600,
               color: Color(0xff090A0A)),
         ),
-        actions:  [
-          GestureDetector(
-            onTap: (){
-              // final controller = Get.find<DashboardController>();
-              // controller.changeTabIndex(2);
-            },
-            child: const Padding(
-              padding: EdgeInsets.only(right: 14.0),
-              child: SizedBox(
-                  height: 24, width: 24, child: Icon(Icons.more_vert_rounded)),
+        actions: [
+          PopupMenuButton(
+            color: Colors.white,
+            offset: const Offset(-23, 35),
+            iconSize: 30,
+            icon: const Icon(
+              Icons.more_vert_rounded,
+              color: Colors.black,
             ),
+            itemBuilder: (context) {
+              return [
+                PopupMenuItem(
+                  padding: const EdgeInsets.only(
+                      top: 6, bottom: 6, left: 15, right: 15),
+                  height: 8,
+                  enabled: false,
+                  child: GestureDetector(
+                    onTap: (){
+                      log("send feedback");
+                    },
+                    child: const Text(
+                      "Send feedback",
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ),
+                ),
+              ];
+            },
           )
         ],
       ),
@@ -118,88 +136,90 @@ class OrderHistoryView extends StatelessWidget {
   }
 
   // Search Bar Widget
- Widget _buildSearchBar() {
-  return Obx(
-    () {
-      return Container(
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          border: Border.all(color: const Color(0xffE5E9EB), width: 1),
-          borderRadius: BorderRadius.circular(8),
-          boxShadow: [
-            BoxShadow(
-              color: const Color(0xff6434F8).withOpacity(0.15),
-              spreadRadius: 0,
-              blurRadius: 8.98,
-              offset: const Offset(1.5, 2.99),
-            ),
-          ],
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 0.0), // Optional adjustment
-          child: TextFormField(
-            style: const TextStyle(
-              color: Color(0xff111111),
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-            ),
-            controller: searchController,
-            onChanged: (value) => controller.filterOrders(value),
-            maxLines: 1,
-            decoration: InputDecoration(
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
+  Widget _buildSearchBar() {
+    return Obx(
+      () {
+        return Container(
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            border: Border.all(color: const Color(0xffE5E9EB), width: 1),
+            borderRadius: BorderRadius.circular(8),
+            boxShadow: [
+              BoxShadow(
+                color: const Color(0xff6434F8).withOpacity(0.15),
+                spreadRadius: 0,
+                blurRadius: 8.98,
+                offset: const Offset(1.5, 2.99),
               ),
-              filled: true,
-              fillColor: Colors.white,
-              isCollapsed: true,
-              contentPadding: const EdgeInsets.symmetric(vertical: 15), // Adjust padding
-              suffixIcon: controller.searchQuery.isNotEmpty
-                  ? Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: InkWell(
-                        onTap: () {
-                          controller.filterOrders('');
-                          searchController.clear();
-                        },
-                        child: Container(
-                            height: 24,
-                            width: 24,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(100),
-                              color: const Color(0xffFFF4ED),
-                            ),
-                            child: const Icon(
-                              CupertinoIcons.multiply,
-                              size: 20,
-                            )),
-                      ),
-                    )
-                  : null,
-              prefixIcon: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Image.asset(
-                  "assets/historyimages/searchicon.png",
-                  width: 20,
-                  height: 20,
+            ],
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+                vertical: 0.0), // Optional adjustment
+            child: TextFormField(
+              style: const TextStyle(
+                color: Color(0xff111111),
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+              ),
+              controller: searchController,
+              onChanged: (value) => controller.filterOrders(value),
+              maxLines: 1,
+              decoration: InputDecoration(
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
                 ),
-              ),
-              hintText: "Search for orders",
-              hintStyle:
-                  TextStyle(color: const Color(0xff111111).withOpacity(0.2)),
-              border: const OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(8),
+                filled: true,
+                fillColor: Colors.white,
+                isCollapsed: true,
+                contentPadding:
+                    const EdgeInsets.symmetric(vertical: 15), // Adjust padding
+                suffixIcon: controller.searchQuery.isNotEmpty
+                    ? Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: InkWell(
+                          onTap: () {
+                            controller.filterOrders('');
+                            searchController.clear();
+                          },
+                          child: Container(
+                              height: 24,
+                              width: 24,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100),
+                                color: const Color(0xffFFF4ED),
+                              ),
+                              child: const Icon(
+                                CupertinoIcons.multiply,
+                                size: 20,
+                              )),
+                        ),
+                      )
+                    : null,
+                prefixIcon: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Image.asset(
+                    "assets/historyimages/searchicon.png",
+                    width: 20,
+                    height: 20,
+                  ),
+                ),
+                hintText: "Search for orders",
+                hintStyle:
+                    TextStyle(color: const Color(0xff111111).withOpacity(0.2)),
+                border: const OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(8),
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-      );
-    },
-  );
-}
+        );
+      },
+    );
+  }
 
   // Status Dropdown Widget
   Widget _buildStatusDropdown() {

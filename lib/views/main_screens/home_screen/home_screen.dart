@@ -118,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 12.0),
                 child: InkWell(
                   onTap: () {
-                    Get.toNamed("/orderview");
+                    Get.find<DashboardController>().changeTabIndex(4);
                   },
                   child: Container(
                     width: double.infinity * 0.6,
