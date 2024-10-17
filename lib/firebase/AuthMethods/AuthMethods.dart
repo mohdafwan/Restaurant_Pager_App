@@ -10,6 +10,10 @@ import 'package:restuarant_pager_app/models/UserModel/UserModel.dart';
 import 'package:restuarant_pager_app/utils/toastMessage.dart';
 import 'package:restuarant_pager_app/views/LinkAccountPage/components/AccountCard.dart';
 
+// http://10.0.2.2:8000 for emulation
+// replace with your machine ip address to test on real device
+const host = "http://192.168.29.88:8000";
+
 class AuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final UserController userController = Get.put(UserController(),permanent: true);
@@ -19,13 +23,11 @@ class AuthMethods {
   Stream<User?> get authChanges => _auth.authStateChanges();
   User? get user => _auth.currentUser;
 
-  // http://10.0.2.2:8000 for emulation
-  // replace with your machine ip address to test on real device
   Map<String, String> routes = {
-    "create_user": "http://10.0.2.2:8000/user/",
-    "get_user": "http://10.0.2.2:8000/user_check/",
-    "email_otp": "http://10.0.2.2:8000/otp/",
-    "update_user": "http://10.0.2.2:8000/user/"
+    "create_user": "$host/user/",
+    "get_user": "$host/user_check/",
+    "email_otp": "$host/otp/",
+    "update_user": "$host/user/"
   };
 
   Future<ResponseModel> signInWithGoogle() async {
@@ -170,7 +172,7 @@ class AuthMethods {
         'gender': user.gender?.toLowerCase(),
         'date_of_birth': user.dateOfBirth,
         'is_active': user.whatsAppMessagePreference,
-        'password':"temp"
+        'password':"temp",
       };
 
       final response = await _dio.post(

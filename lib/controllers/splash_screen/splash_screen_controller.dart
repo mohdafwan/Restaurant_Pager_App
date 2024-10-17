@@ -27,6 +27,7 @@ class SplashScreenController extends GetxController {
           final ResponseModel response = await authMethods.getUserData();
           if (response.message == "success") {
             // User data found, navigate to dashboard
+            // todo : send fcm token to backend
             Get.offAllNamed('/dashboard');
           } else if(userController.phoneNumber != null){
             final res = authMethods.fetchUserAccounts();

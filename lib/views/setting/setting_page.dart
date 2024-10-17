@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:restuarant_pager_app/firebase/AuthMethods/AuthMethods.dart';
 import 'package:restuarant_pager_app/views/tickets/raise_ticket.dart';
 
 import '../../widgets/alert_dialog.dart';
@@ -111,7 +112,7 @@ void showCustomAlertDialog(BuildContext context) {
         subtitle: 'Are you sure you want to log out?',
         onYesPressed: () {
           // Handle Yes button action
-          Navigator.of(context).pop();
+          Get.find<AuthMethods>().signOut();
         },
         onNoPressed: () {
           // Handle No button action

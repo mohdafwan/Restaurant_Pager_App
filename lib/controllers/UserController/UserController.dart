@@ -4,7 +4,6 @@ import 'package:restuarant_pager_app/models/UserModel/UserModel.dart';
 
 class UserController extends GetxController {
   Rx<UserModel> currentUser = UserModel().obs;
-
   UserModel get user => currentUser.value;
   String? get name => currentUser.value.name;
   String? get phoneNumber => currentUser.value.phone?.getE164FormattedPhoneNumber();
