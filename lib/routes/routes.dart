@@ -36,7 +36,7 @@ class AppRoutes {
       transition: Transition.downToUp,
       transitionDuration: const Duration(milliseconds: 300),
     ),
-     GetPage(
+    GetPage(
       name: '/orderview',
       page: () => OrderHistoryView(),
       transition: Transition.rightToLeft,
@@ -48,7 +48,7 @@ class AppRoutes {
       transition: Transition.rightToLeft,
       transitionDuration: const Duration(milliseconds: 250),
     ),
-    
+
     // ----------SettingScreen Routes
     // GetPage(
     //   name: '/onsettingprofile',
@@ -78,6 +78,5 @@ class AppRoutes {
       transitionDuration: const Duration(milliseconds: 250),
       page: () => const SubmitIssuePage(),
     ),
-    
   ];
 }
