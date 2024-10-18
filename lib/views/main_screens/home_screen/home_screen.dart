@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:restuarant_pager_app/controllers/UserController/UserController.dart';
 import 'package:restuarant_pager_app/controllers/dashboard_controller/dashboard_controller.dart';
 import 'package:restuarant_pager_app/controllers/pages_controller/home_controller/home_controller.dart';
 import 'package:share_plus/share_plus.dart';
@@ -15,6 +17,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   var logger = Logger();
   CurrentOrderController currentOrders = Get.put(CurrentOrderController());
+  final userController = Get.find<UserController>();
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +27,13 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 0,
         scrolledUnderElevation: 0,
         backgroundColor: const Color(0xffFE6E39),
-        title: const Padding(
-          padding: EdgeInsets.only(left: 16.0),
+        title: Padding(
+          padding: const EdgeInsets.only(left: 16.0),
           child: Text(
-            "Hi, Sahib",
-            style: TextStyle(
+            userController.name == null
+                ? "Hi there,"
+                : "Hi, ${userController.name}",
+            style: const TextStyle(
                 fontSize: 24, fontWeight: FontWeight.w600, color: Colors.white),
           ),
         ),
@@ -38,11 +43,14 @@ class _HomeScreenState extends State<HomeScreen> {
             onTap: () {
               Get.find<DashboardController>().changeTabIndex(2);
             },
-            child: const Padding(
-              padding: EdgeInsets.only(right: 16),
-              child: CircleAvatar(
-                child: Icon(Icons.person),
-              ),
+            child: Padding(
+              padding: const EdgeInsets.only(right: 16),
+              child: userController.profilePic == null
+                  ? SvgPicture.asset("assets/homeImages/avatars.svg")
+                  : CircleAvatar(
+                      foregroundImage:
+                          AssetImage("${userController.profilePic}"),
+                    ),
             ),
           )
         ],
@@ -162,7 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     InkWell(
                       //Setting page route
                       onTap: () {
-                       Get.toNamed("/onsettingnotification");
+                        Get.toNamed("/onsettingnotification");
                       },
                       child: const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

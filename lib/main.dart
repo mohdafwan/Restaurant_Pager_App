@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:restuarant_pager_app/constants/color_palette.dart';
 import 'package:restuarant_pager_app/firebase/AuthMethods/AuthMethods.dart';
 import 'package:restuarant_pager_app/routes/routes.dart';
+import 'package:restuarant_pager_app/views/main_screens/home_screen/home_screen.dart';
 import 'package:restuarant_pager_app/views/splashScreen/splash_screen.dart';
 import 'controllers/notification/notification_settrings_controller.dart';
 import 'firebase/firebase_api.dart';
@@ -43,11 +44,10 @@ class MyApp extends StatelessWidget {
             Theme.of(context).textTheme,
           ),
         ),
-        home: const SplashScreen(),
+        home: const HomeScreen(),
+        //SplashScreen(),
         getPages: AppRoutes.routes,
       ),
     );
   }
 }
-
-
