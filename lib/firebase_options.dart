@@ -41,55 +41,48 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDLw1fVV0jybUeHsHZfRPsMS6v1LUWLnYQ',
-    appId: '1:959984253746:web:c9a4b8535dca7bcec6352b',
-    messagingSenderId: '959984253746',
-    projectId: 'resturantpager',
-    authDomain: 'resturantpager.firebaseapp.com',
-    databaseURL: 'https://resturantpager-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'resturantpager.appspot.com',
-    measurementId: 'G-Z9C9D9TRXD',
+    apiKey: 'AIzaSyDCUrI2q5lp6rA_UFCBjJ5kyLtSZQWioo4',
+    appId: '1:742342151590:web:5f4a25bf1388dd7208d367',
+    messagingSenderId: '742342151590',
+    projectId: 'resturantpager-bf7bb',
+    authDomain: 'resturantpager-bf7bb.firebaseapp.com',
+    storageBucket: 'resturantpager-bf7bb.appspot.com',
+    measurementId: 'G-TN8WP6Z90X',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyA0GQF-wQsjib5soErL3a98RxI3VAcCpPA',
-    appId: '1:959984253746:android:44071b3f9766f479c6352b',
-    messagingSenderId: '959984253746',
-    projectId: 'resturantpager',
-    databaseURL: 'https://resturantpager-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'resturantpager.appspot.com',
+    apiKey: 'AIzaSyB4spP-xulXjmC98z-eS5ULYJxkf-m5QYU',
+    appId: '1:742342151590:android:83ce8a8148ca7dab08d367',
+    messagingSenderId: '742342151590',
+    projectId: 'resturantpager-bf7bb',
+    storageBucket: 'resturantpager-bf7bb.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyB3_6igcDyXPkKqCS0RYOLpXCjS9YStASE',
-    appId: '1:959984253746:ios:de1b23663ed4b280c6352b',
-    messagingSenderId: '959984253746',
-    projectId: 'resturantpager',
-    databaseURL: 'https://resturantpager-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'resturantpager.appspot.com',
-    iosClientId: '959984253746-qqdlun4flp8r3t3jrti7fo2ftt7dme11.apps.googleusercontent.com',
+    apiKey: 'AIzaSyCOKmahV05HwJLixsrR4Nq11dwicHiyxEY',
+    appId: '1:742342151590:ios:2f78e0588af1242a08d367',
+    messagingSenderId: '742342151590',
+    projectId: 'resturantpager-bf7bb',
+    storageBucket: 'resturantpager-bf7bb.appspot.com',
     iosBundleId: 'com.example.restuarantPagerApp',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyB3_6igcDyXPkKqCS0RYOLpXCjS9YStASE',
-    appId: '1:959984253746:ios:de1b23663ed4b280c6352b',
-    messagingSenderId: '959984253746',
-    projectId: 'resturantpager',
-    databaseURL: 'https://resturantpager-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'resturantpager.appspot.com',
-    iosClientId: '959984253746-qqdlun4flp8r3t3jrti7fo2ftt7dme11.apps.googleusercontent.com',
+    apiKey: 'AIzaSyCOKmahV05HwJLixsrR4Nq11dwicHiyxEY',
+    appId: '1:742342151590:ios:2f78e0588af1242a08d367',
+    messagingSenderId: '742342151590',
+    projectId: 'resturantpager-bf7bb',
+    storageBucket: 'resturantpager-bf7bb.appspot.com',
     iosBundleId: 'com.example.restuarantPagerApp',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyDLw1fVV0jybUeHsHZfRPsMS6v1LUWLnYQ',
-    appId: '1:959984253746:web:f1a7bf70663fd25dc6352b',
-    messagingSenderId: '959984253746',
-    projectId: 'resturantpager',
-    authDomain: 'resturantpager.firebaseapp.com',
-    databaseURL: 'https://resturantpager-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'resturantpager.appspot.com',
-    measurementId: 'G-ZTBXS9WJEL',
+    apiKey: 'AIzaSyDCUrI2q5lp6rA_UFCBjJ5kyLtSZQWioo4',
+    appId: '1:742342151590:web:7df497b1fe50023f08d367',
+    messagingSenderId: '742342151590',
+    projectId: 'resturantpager-bf7bb',
+    authDomain: 'resturantpager-bf7bb.firebaseapp.com',
+    storageBucket: 'resturantpager-bf7bb.appspot.com',
+    measurementId: 'G-SH5QXH55LK',
   );
 }

@@ -9,36 +9,38 @@ import '../notifaicatio/notifaication_view_page.dart';
 
 class TicketHistoryPage extends StatelessWidget {
   final TicketController controller = Get.put(TicketController());
-  final NotificationSettingsController settingsController =
-      Get.find<NotificationSettingsController>();
+  final NotificationsSettingsController settingsController =
+      Get.find<NotificationsSettingsController>();
+
+  TicketHistoryPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color(0xfff7f9fa),
+        backgroundColor: const Color(0xfff7f9fa),
         appBar: AppBar(
-          backgroundColor: Color(0xfff7f9fa),
+          backgroundColor: const Color(0xfff7f9fa),
           title: const Text(
             'Ticket history',
             style: TextStyle(fontWeight: FontWeight.w700),
           ),
           centerTitle: true,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             onPressed: () => Get.back(),
           ),
           actions: [
             //add settings page
             IconButton(
-              icon:const Icon(Icons.settings),
+              icon: const Icon(Icons.settings),
               onPressed: () {
                 //TODO: Get.to(() => SettingsPage()); sync with the pages
                 // Get.to(() => SettingsPage());
               },
             ),
             IconButton(
-              icon: Icon(Icons.notification_add),
+              icon: const Icon(Icons.notification_add),
               onPressed: () {
                 //get.to NotificationView
                 Get.to(NotificationView(
@@ -54,7 +56,7 @@ class TicketHistoryPage extends StatelessWidget {
             itemBuilder: (context, index) {
               return Column(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   TicketItem(ticket: controller.tickets[index]),
@@ -65,15 +67,15 @@ class TicketHistoryPage extends StatelessWidget {
         }),
         bottomNavigationBar: BottomNavigationBar(
           items: [
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: 'Home',
             ),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               icon: Icon(Icons.document_scanner_rounded),
               label: "",
             ),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               icon: Icon(Icons.history),
               label: 'History',
             ),

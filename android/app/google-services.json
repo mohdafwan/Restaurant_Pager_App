@@ -1,37 +1,26 @@
 {
   "project_info": {
-    "project_number": "959984253746",
-    "firebase_url": "https://resturantpager-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "project_id": "resturantpager",
-    "storage_bucket": "resturantpager.appspot.com"
+    "project_number": "742342151590",
+    "project_id": "resturantpager-bf7bb",
+    "storage_bucket": "resturantpager-bf7bb.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:959984253746:android:44071b3f9766f479c6352b",
+        "mobilesdk_app_id": "1:742342151590:android:83ce8a8148ca7dab08d367",
         "android_client_info": {
           "package_name": "com.example.restuarant_pager_app"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "959984253746-nsj9k65ems02lj9no7fjfijuhous5llr.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyA0GQF-wQsjib5soErL3a98RxI3VAcCpPA"
+          "current_key": "AIzaSyB4spP-xulXjmC98z-eS5ULYJxkf-m5QYU"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "959984253746-nsj9k65ems02lj9no7fjfijuhous5llr.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

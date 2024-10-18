@@ -9,7 +9,7 @@ import 'package:restuarant_pager_app/routes/routes.dart';
 import 'package:restuarant_pager_app/views/splashScreen/splash_screen.dart';
 import 'controllers/notification/notification_settrings_controller.dart';
 import 'firebase/firebase_api.dart';
-import 'firebase_options2.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,7 +17,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  Get.put(NotificationSettingsController());
+  Get.put(NotificationsSettingsController());
   await FirebaseApi().initNotifications();
   FirebaseAuth.instance.setLanguageCode('en');
   Get.put(AuthMethods(), permanent: true);

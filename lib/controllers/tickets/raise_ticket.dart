@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:restuarant_pager_app/models/tickets/raise_ticket.dart';
 import 'package:http/http.dart' as http;
 import '../../utils/upload_to_firebase.dart';

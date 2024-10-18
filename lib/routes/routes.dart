@@ -3,7 +3,7 @@ import 'package:restuarant_pager_app/views/LoginView/loginPage.dart';
 import 'package:restuarant_pager_app/views/SignUpView/signUpPage.dart';
 import 'package:restuarant_pager_app/views/main_screens/history_screen/history_screen.dart';
 import 'package:restuarant_pager_app/views/main_screens/scanner_screen/scanner_screen.dart';
-import 'package:restuarant_pager_app/views/notifaicatio/notification_screen_page.dart';
+import 'package:restuarant_pager_app/views/notifaicatio/notification_screen_page_priyanka.dart';
 import 'package:restuarant_pager_app/views/pages/dashboard/dashboard.dart';
 import 'package:restuarant_pager_app/views/pages/dashboard/dashboard_binding.dart';
 import 'package:restuarant_pager_app/views/pages/onboarding/boarding_screen.dart';

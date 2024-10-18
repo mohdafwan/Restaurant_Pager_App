@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>959984253746-qqdlun4flp8r3t3jrti7fo2ftt7dme11.apps.googleusercontent.com</string>
+	<string>742342151590-7lkn7l4qf76d88evq3a0inka0ja6ske9.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.959984253746-qqdlun4flp8r3t3jrti7fo2ftt7dme11</string>
+	<string>com.googleusercontent.apps.742342151590-7lkn7l4qf76d88evq3a0inka0ja6ske9</string>
 	<key>API_KEY</key>
-	<string>AIzaSyB3_6igcDyXPkKqCS0RYOLpXCjS9YStASE</string>
+	<string>AIzaSyCOKmahV05HwJLixsrR4Nq11dwicHiyxEY</string>
 	<key>GCM_SENDER_ID</key>
-	<string>959984253746</string>
+	<string>742342151590</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.example.restuarantPagerApp</string>
 	<key>PROJECT_ID</key>
-	<string>resturantpager</string>
+	<string>resturantpager-bf7bb</string>
 	<key>STORAGE_BUCKET</key>
-	<string>resturantpager.appspot.com</string>
+	<string>resturantpager-bf7bb.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:959984253746:ios:de1b23663ed4b280c6352b</string>
-	<key>DATABASE_URL</key>
-	<string>https://resturantpager-default-rtdb.asia-southeast1.firebasedatabase.app</string>
+	<string>1:742342151590:ios:2f78e0588af1242a08d367</string>
 </dict>
 </plist>
