@@ -6,7 +6,7 @@ import 'package:restuarant_pager_app/controllers/pages_controller/home_controlle
 class DashboardBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<DashboardController>(() => DashboardController());
+    Get.put<DashboardController>(DashboardController(), permanent: true); // making it permanent
     Get.lazyPut<CurrentOrderController>(() => CurrentOrderController());
     Get.lazyPut<OrderHistoryController>(() => OrderHistoryController());
   }

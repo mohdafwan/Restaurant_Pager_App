@@ -107,7 +107,7 @@ class _PhoneNoFieldState extends State<PhoneNoField> {
                   width: 30,
                   child: TextButton(
                     onPressed: () {
-                      Get.to(() => const UpdateNumberDetails(title: "Change Phone Number"));
+                      Get.to(() => const UpdateNumberDetails(title: "Add Phone Number"));
                     },
                     style: TextButton.styleFrom(
                       padding: EdgeInsets.zero,

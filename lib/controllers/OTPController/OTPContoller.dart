@@ -1,11 +1,14 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:restuarant_pager_app/controllers/EditProfileController/EditProfileController.dart';
 import 'package:restuarant_pager_app/controllers/EmailController/EmailController.dart';
 import 'package:restuarant_pager_app/controllers/PhoneNumberController/PhoneNumberController.dart';
 import 'package:restuarant_pager_app/controllers/SignUpController/SignUpController.dart';
 import 'package:restuarant_pager_app/controllers/UserController/UserController.dart';
+import 'package:restuarant_pager_app/controllers/dashboard_controller/dashboard_controller.dart';
 import 'package:restuarant_pager_app/firebase/AuthMethods/AuthMethods.dart';
 import 'package:restuarant_pager_app/models/OTPModel/OTP.model.dart';
 import 'package:restuarant_pager_app/models/PhoneNumberModel/PhoneNumber.model.dart';
@@ -90,7 +93,12 @@ class OTPController extends GetxController {
       // extract user data
       User userData = res.data;
       userController.updateUserDetails(uid: userData.uid);
+    }else if(res.message == "Phone number linked to Gmail account"){
+      Get.offAllNamed("/signup"); 
+    }else if(res.message == "Phone number updated"){
+      Get.offAllNamed('/dashboard');
     }else{
+      if(kDebugMode) debugPrint("error signing in using phone : ${res.message}");
       // error in authentication , go to login screen
       Get.offAllNamed('/login');
     }
@@ -99,8 +107,13 @@ class OTPController extends GetxController {
   void validateEmailOTP() {
     if(_emailOTP.trim() == otp?.trim()){
       // email is verified , submit user data
-      Get.find<SignUpController>().submit();
+      if(_authMethods.loggedIn){
+        Get.find<EditProfileController>().submit();
+      }else{
+        Get.find<SignUpController>().submit();
+      }
       // goto home screen
+      Get.find<DashboardController>().tabIndex.value = 0; // making user land on home screen
       Get.offAllNamed('/dashboard');
     }else{
       // error in authentication , go to signup page

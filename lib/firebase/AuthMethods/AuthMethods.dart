@@ -65,34 +65,46 @@ class AuthMethods {
     return ResponseModel(message: res);
   }
 
-  Future<ResponseModel> signInUsingPhoneNumber() async {
-    final otpController = Get.find<OTPController>();
-    String res = "some error occurred";
-    try {
-      String verificationId = otpController.verificationId!;
-      final credential = PhoneAuthProvider.credential(
-        verificationId: verificationId,
-        smsCode: otpController.otp!,
-      );
-      if (userController.uid == null) {
-        final userCredential = await _auth.signInWithCredential(credential);
-        User? user = userCredential.user;
-        if (user != null) {
-          userController.updateUserDetails(uid: user.uid);
-          res = "success";
-        }
-      } else {
-        await user?.linkWithCredential(credential);
+Future<ResponseModel> signInUsingPhoneNumber() async {
+  final otpController = Get.find<OTPController>();
+  final userController = Get.find<UserController>();
+  String res = "some error occurred";
+
+  try {
+    String verificationId = otpController.verificationId!;
+    final credential = PhoneAuthProvider.credential(
+      verificationId: verificationId,
+      smsCode: otpController.otp!,
+    );
+
+    // If the user is not logged in, sign in with the phone number
+    if (user == null) {
+      final userCredential = await _auth.signInWithCredential(credential);
+      User? _user = userCredential.user;
+      if (_user != null) {
+        userController.updateUserDetails(uid: _user.uid);
+        res = "success";
       }
-    } catch (error) {
-      if (error is FirebaseAuthException) {
-        res = error.message ?? "Verification failed. Please try again.";
+    } else {
+      if (loggedIn) {
+        await user!.updatePhoneNumber(credential);
+        res = "Phone number updated";
       } else {
-        res = "An unexpected error occurred: $error";
+        await user!.linkWithCredential(credential);
+        res = "Phone number linked to Gmail account";
       }
     }
-    return ResponseModel(message: res, data: user);
+  } catch (error) {
+    if (error is FirebaseAuthException) {
+      res = error.message ?? "Verification failed. Please try again.";
+    } else {
+      res = "An unexpected error occurred: $error";
+    }
   }
+
+  return ResponseModel(message: res, data: user);
+}
+
 
   Future<ResponseModel> sentOTPtoEmail(String email) async {
     String res = "some error occurred";

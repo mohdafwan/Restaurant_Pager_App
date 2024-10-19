@@ -30,7 +30,7 @@ class SignUpController extends GetxController {
 
   String? get emailAdress => emailController.emailAddress;
   String? get phoneNumber => phoneNumberController.phoneNumber;
-  String? get countryCode => signUpModel.value.phoneNumber!.countryCode;
+  String? get countryCode => phoneNumberController.selectedCountryCode;
   String? get countryFlag => phoneNumberController.selectedCountryFlag;
   String? get name => signUpModel.value.name;
   String? get dateOfBirth => signUpModel.value.dateOfBirth;

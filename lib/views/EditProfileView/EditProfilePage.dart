@@ -8,6 +8,7 @@ import 'package:restuarant_pager_app/views/EditProfileView/components/EditProfil
 import 'package:restuarant_pager_app/views/EditProfileView/components/EditProfileNameField.dart';
 import 'package:restuarant_pager_app/views/EditProfileView/components/EditProfilePhoneNoField.dart';
 import 'package:restuarant_pager_app/views/EditProfileView/components/EditProfilePicField.dart';
+import 'package:restuarant_pager_app/views/VerifyEmailUsingOTP/VerifyEmailUsingOTP.dart';
 import 'package:restuarant_pager_app/widgets/Button.dart';
 
 
@@ -19,16 +20,25 @@ class EditProfilePage extends StatefulWidget {
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
-  final editProfileController = Get.put(EditProfileController());
+  late EditProfileController editProfileController;
   final _formKey = GlobalKey<FormState>();
   bool clicked = false;
 
+  @override
+  void initState() {
+    editProfileController = Get.put(EditProfileController());
+    super.initState();
+  }
+
   void _submitForm(){
-    if(_formKey.currentState!.validate()) return;
+    if(!_formKey.currentState!.validate()) return;
     setState((){
       clicked = true;
     });
-    editProfileController.submit(context);
+    Get.to(() => const VerifyEmailUsingOTP());
+    setState((){
+      clicked = false;
+    });
   }
 
   @override
