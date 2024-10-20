@@ -190,6 +190,11 @@ Future<ResponseModel> signInUsingPhoneNumber() async {
       final response = await _dio.post(
         routes['create_user']!,
         data: data,
+        options: dio.Options(
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        ),
       );
 
       if (response.statusCode == 201) {
@@ -355,6 +360,11 @@ Future<ResponseModel> signInUsingPhoneNumber() async {
       final response = await _dio.post(
         '${routes['update_user']!}/${userController.id}',
         data: data,
+        options: dio.Options(
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        ),
       );
 
       if (response.statusCode == 200) {

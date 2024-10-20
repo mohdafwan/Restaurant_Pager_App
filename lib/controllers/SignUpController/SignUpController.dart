@@ -90,6 +90,8 @@ void submit() async {
 String? validateName() {
   if (signUpModel.value.name == null || signUpModel.value.name!.isEmpty) {
     return "Name can't be empty";
+  }else if(signUpModel.value.name!.contains(RegExp(r'\s'))){
+    return "Name can't contain spaces";
   }
   return null;
 }

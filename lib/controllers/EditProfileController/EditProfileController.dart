@@ -106,6 +106,8 @@ class EditProfileController extends GetxController {
   String? validateName() {
     if (model.value.name == null || model.value.name!.isEmpty) {
       return "Name can't be empty";
+    }else if(model.value.name!.contains(RegExp(r'\s'))){
+      return "Name can't contain spaces";
     }
     return null;
   }
