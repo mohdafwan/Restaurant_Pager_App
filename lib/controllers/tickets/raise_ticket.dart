@@ -1,13 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:restuarant_pager_app/firebase/AuthMethods/AuthMethods.dart';
 import 'package:restuarant_pager_app/models/tickets/raise_ticket.dart';
 import 'package:http/http.dart' as http;
 import '../../utils/upload_to_firebase.dart';
 
 class IssueTicketController {
   late final String ticketId;
-  final url = Uri.parse('http://10.0.2.2:8000/ticket/?format=json');
+  final url = Uri.parse('$host/ticket/?format=json');
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   IssueTicketModel ticket = IssueTicketModel(
     firstName: '',

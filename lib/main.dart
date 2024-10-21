@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:restuarant_pager_app/constants/color_palette.dart';
+import 'package:restuarant_pager_app/controllers/dashboard_controller/dashboard_controller.dart';
 import 'package:restuarant_pager_app/firebase/AuthMethods/AuthMethods.dart';
 import 'package:restuarant_pager_app/routes/routes.dart';
 import 'package:restuarant_pager_app/views/splashScreen/splash_screen.dart';
@@ -20,6 +21,7 @@ void main() async {
   Get.put(NotificationsSettingsController());
   await FirebaseApi().initNotifications();
   FirebaseAuth.instance.setLanguageCode('en');
+  Get.put(DashboardController(), permanent: true);
   Get.put(AuthMethods(), permanent: true);
   runApp(const MyApp());
 }

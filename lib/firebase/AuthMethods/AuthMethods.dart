@@ -87,10 +87,10 @@ Future<ResponseModel> signInUsingPhoneNumber() async {
       }
     } else {
       if (loggedIn) {
-        await user!.updatePhoneNumber(credential);
+        // await user!.updatePhoneNumber(credential);
         res = "Phone number updated";
       } else {
-        await user!.linkWithCredential(credential);
+        // await user!.linkWithCredential(credential);
         res = "Phone number linked to Gmail account";
       }
     }
@@ -358,7 +358,7 @@ Future<ResponseModel> signInUsingPhoneNumber() async {
       };
 
       final response = await _dio.post(
-        '${routes['update_user']!}/${userController.id}',
+        '${routes['update_user']!}${userController.id}',
         data: data,
         options: dio.Options(
           headers: {

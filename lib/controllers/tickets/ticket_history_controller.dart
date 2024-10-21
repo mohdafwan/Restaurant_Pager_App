@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:restuarant_pager_app/firebase/AuthMethods/AuthMethods.dart';
 import 'dart:convert';
 import 'package:restuarant_pager_app/models/tickets/ticket_model.dart';
 
@@ -17,7 +18,7 @@ class TicketController extends GetxController {
     isLoading.value = true; // Set loading state to true.
     try {
       print('start fetching tickets');
-      final response = await http.get(Uri.parse('http://10.0.2.2:8000/ticket/?format=json'));
+      final response = await http.get(Uri.parse('$host/ticket/?format=json'));
       print('end fetching tickets');
       if (response.statusCode == 200) {
         print('inside if');
