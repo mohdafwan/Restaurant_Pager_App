@@ -42,6 +42,7 @@ dependencies:
   share_plus: ^10.0.0
   path_provider: ^2.1.4
   win32: ^5.6.1
+  super_tooltip: ^2.0.8
 
 
 dev_dependencies:
@@ -56,6 +57,7 @@ flutter:
 
   
   assets:
+    - assets/feedBackAssets/
     - assets/onboardingImg/
     - assets/images/
     - assets/phoneNumberAssets/

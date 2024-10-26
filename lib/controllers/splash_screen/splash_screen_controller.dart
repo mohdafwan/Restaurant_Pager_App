@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:restuarant_pager_app/controllers/UserController/UserController.dart';
+import 'package:restuarant_pager_app/controllers/dashboard_controller/dashboard_controller.dart';
 import 'package:restuarant_pager_app/firebase/AuthMethods/AuthMethods.dart';
 import 'package:restuarant_pager_app/models/ResponseModel/ResponseModel.dart';
 import 'package:restuarant_pager_app/views/LinkAccountPage/LinkAccountPage.dart';
@@ -28,15 +29,17 @@ class SplashScreenController extends GetxController {
           if (response.message == "success") {
             // User data found, navigate to dashboard
             // todo : send fcm token to backend
+            Get.find<DashboardController>().tabIndex.value = 0; // making user land on home screen
             Get.offAllNamed('/dashboard');
           } else if(userController.phoneNumber != null){
             final res = authMethods.fetchUserAccounts();
              // if user's phone number is linked to multiple account
             if(res.message == 'success' && res.data.length > 1){
               Get.to(() => LinkAccountPage(accounts: res.data));
+            }else{
+              // Error retrieving user data, navigate to sign up page to get details and register at backend
+              Get.offAllNamed('/signup');
             }
-            // Error retrieving user data, navigate to sign up page to get details and register at backend
-            Get.offAllNamed('/signup');
           }else{
             Get.off(() => const UpdateNumberDetails(title: "Add Phone Number"));
           }

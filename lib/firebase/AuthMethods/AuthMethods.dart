@@ -16,6 +16,9 @@ const host = "http://192.168.29.88:8000";
 
 class AuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final _authGoogle = GoogleSignIn(scopes: [
+        "email", // only request email
+      ]);
   final UserController userController = Get.put(UserController(),permanent: true);
   final dio.Dio _dio = dio.Dio();
   bool loggedIn = false;
@@ -33,9 +36,7 @@ class AuthMethods {
   Future<ResponseModel> signInWithGoogle() async {
     String res = "some error occurred";
     try {
-      final GoogleSignInAccount? googleUser = await GoogleSignIn(scopes: [
-        "email", // only request email
-      ]).signIn();
+      final GoogleSignInAccount? googleUser = await _authGoogle.signIn();
 
       // Check if the user canceled the sign-in
       if (googleUser == null) {
@@ -358,7 +359,7 @@ Future<ResponseModel> signInUsingPhoneNumber() async {
       };
 
       final response = await _dio.post(
-        '${routes['update_user']!}${userController.id}',
+        '${routes['update_user']!}${userController.id}/',
         data: data,
         options: dio.Options(
           headers: {
@@ -382,6 +383,7 @@ Future<ResponseModel> signInUsingPhoneNumber() async {
     String res = "some error occurred";
     try {
       _auth.signOut();
+      _authGoogle.signOut();
       userController.clearUserData();
       res = "success";
     } catch (error) {

@@ -9,7 +9,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:flutter/rendering.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:restuarant_pager_app/controllers/dashboard_controller/dashboard_controller.dart';
 import 'package:restuarant_pager_app/utils/toastMessage.dart';
+import 'package:restuarant_pager_app/views/FeedBack/FeedBackSheet.dart';
 import 'package:restuarant_pager_app/views/main_screens/scanner_screen/components/QrCodePainter.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../../controllers/QrCodeController/qr_code_controller.dart';
@@ -135,13 +137,46 @@ Future<void> _shareQrCode(GlobalKey key) async {
           IconButton(
             icon: SvgPicture.asset('assets/images/download.svg'),
             onPressed: () {
-              _saveQrCodeToGallery(_qrKey,context);
+              _saveQrCodeToGallery(_qrKey, context);
             },
           ),
-          IconButton(
-            onPressed: () {
+          PopupMenuButton(
+            color: Colors.white,
+            offset: const Offset(-23, 35),
+            iconSize: 24,
+            icon: const Icon(
+              Icons.more_vert_rounded,
+              color: Colors.black,
+            ),
+            itemBuilder: (context) {
+              return [
+                PopupMenuItem(
+                  padding: const EdgeInsets.only(
+                      top: 6, bottom: 6, left: 15, right: 15),
+                  height: 8,
+                  onTap: () {
+                    // handle route to raise ticket
+                    Get.find<DashboardController>().changeTabIndex(5);
+                  },
+                  child: const Text(
+                    "Raise Ticket",
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+                PopupMenuItem(
+                  padding: const EdgeInsets.only(
+                      top: 6, bottom: 6, left: 15, right: 15),
+                  height: 8,
+                  onTap: () {
+                    showFeedBackForm(context);
+                  },
+                  child: const Text(
+                    "Send feedback",
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+              ];
             },
-            icon: const Icon(Icons.more_vert, color: Colors.black),
           ),
         ],
       ),

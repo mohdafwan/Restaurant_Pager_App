@@ -21,7 +21,7 @@ class SignUpPage extends StatefulWidget {
   _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _SignUpPageState extends State<SignUpPage> with WidgetsBindingObserver {
   final _formKey = GlobalKey<FormState>();
   bool signUpUsingPhone = true;
   final SignUpController controller = Get.put(SignUpController());
@@ -29,10 +29,27 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   void initState() {
-    if(controller.emailAdress != null){
+    super.initState();
+    if (controller.emailAdress != null) {
       signUpUsingPhone = false;
     }
-    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this); 
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      setState(() {
+        clicked = false;
+      });
+    }
+    super.didChangeAppLifecycleState(state);
   }
 
   void _submitForm() {
@@ -40,9 +57,9 @@ class _SignUpPageState extends State<SignUpPage> {
     setState(() {
       clicked = true;
     });
-    if(signUpUsingPhone){
+    if (signUpUsingPhone) {
       Get.to(const VerifyEmailUsingOTP());
-    }else{
+    } else {
       controller.submit();
     }
   }
@@ -55,7 +72,7 @@ class _SignUpPageState extends State<SignUpPage> {
         centerTitle: false,
         titleSpacing: 0,
         title: Padding(
-          padding: const EdgeInsets.only(left: 44,top: 33),
+          padding: const EdgeInsets.only(left: 44, top: 33),
           child: Text(
             "Personal Details",
             style: GoogleFonts.inter(
@@ -71,7 +88,7 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
       body: Center(
         child: SingleChildScrollView(
-          scrollDirection: Axis.vertical, 
+          scrollDirection: Axis.vertical,
           child: Form(
             key: _formKey,
             child: Padding(
@@ -84,36 +101,28 @@ class _SignUpPageState extends State<SignUpPage> {
                     child: ProfilePic(),
                   ),
                   const SizedBox(height: 16),
-                  // Name section
                   const NameField(),
                   const SizedBox(height: 16),
-                  // DOB section
-                  const DateField(),                  
+                  const DateField(),
                   const SizedBox(height: 16),
-                  // Gender section
                   const GenderField(),
                   const SizedBox(height: 16),
-                  // Phone Number section
-                  const PhoneNoField(),  
+                  const PhoneNoField(),
                   const SizedBox(height: 16),
-                  // Email section
                   const EmailField(),
                   const SizedBox(height: 30),
-                  // WhatsApp perference section --> checkbox
                   const MessagePerference(),
                   const SizedBox(height: 30),
-                  // Create Account Button
                   Button(
                     onPressed: _submitForm,
                     text: "Create account",
                     disable: clicked,
                   ),
                   const SizedBox(height: 30),
-                  // Terms & conditions
                   const Center(
                     child: TermsAndConditons(),
                   ),
-                  const SizedBox(height: 16,)
+                  const SizedBox(height: 16),
                 ],
               ),
             ),
