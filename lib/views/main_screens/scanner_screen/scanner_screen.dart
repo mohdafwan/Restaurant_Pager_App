@@ -157,6 +157,7 @@ Future<void> _shareQrCode(GlobalKey key) async {
                   onTap: () {
                     // handle route to raise ticket
                     Get.find<DashboardController>().changeTabIndex(5);
+                    Get.offNamed('/dashboard');
                   },
                   child: const Text(
                     "Raise Ticket",

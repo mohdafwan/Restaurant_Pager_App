@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:restuarant_pager_app/firebase/AuthMethods/AuthMethods.dart';
 import 'package:restuarant_pager_app/controllers/dashboard_controller/dashboard_controller.dart';
 import '../../widgets/alert_dialog.dart';
@@ -14,6 +15,21 @@ class SettingsPagex extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
+        automaticallyImplyLeading: false,
+        leading: SizedBox(
+          width: 24,
+          height: 24,
+          child: IconButton(
+              onPressed: () {
+                Get.find<DashboardController>().changeTabIndex(0);
+              },
+              padding: const EdgeInsets.all(0),
+              icon: const Icon(
+                Icons.arrow_back_outlined,
+                color: Colors.black,
+                size: 24,
+              )),
+        ),
         backgroundColor: Colors.white,
         title: const Text(
           'Settings',
@@ -33,13 +49,6 @@ class SettingsPagex extends StatelessWidget {
                   icon: Icons.person_outline_rounded,
                   onTap: () {
                     Get.find<DashboardController>().changeTabIndex(3);
-                  },
-                ),
-                SettingTile(
-                  title: 'Password',
-                  icon: Icons.lock_outline_rounded,
-                   onTap: () {
-                    Get.toNamed('/onsettingpasswordreset');
                   },
                 ),
                 SettingTile(
@@ -86,9 +95,13 @@ class SettingsPagex extends StatelessWidget {
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(0).copyWith(bottom: 10),
-                  child: const Text(
+                  child: Text(
                     'Log Out',
-                    style: TextStyle(fontSize: 22, color: Colors.grey),
+                    style: GoogleFonts.inter(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 14,
+                      color: const Color.fromRGBO(151, 156, 158, 1)
+                    ),
                   ),
                 ),
               ),

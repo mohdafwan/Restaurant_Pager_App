@@ -24,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: const Color(0xffFE6E39),
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         elevation: 0,
         scrolledUnderElevation: 0,
         backgroundColor: const Color(0xffFE6E39),

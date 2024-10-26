@@ -127,6 +127,16 @@ class EditProfileController extends GetxController {
       initialDate: initialDate,
       firstDate: firstDate,
       lastDate: lastDate,
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            primaryColor: const Color.fromRGBO(253, 71, 18, 1),
+            colorScheme: const ColorScheme.light(primary: Color.fromRGBO(253, 71, 18, 1)),
+            buttonTheme: const ButtonThemeData(textTheme: ButtonTextTheme.primary),
+          ),
+          child: child ?? Container(),
+        );
+      },
     );
 
     if (picked != null && picked != initialDate) {
