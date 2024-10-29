@@ -22,6 +22,7 @@ class FeedBackScreen1 extends StatefulWidget {
 class _FeedBackScreen1State extends State<FeedBackScreen1> {
   final _formKey = GlobalKey<FormState>();
   final _controller = Get.find<FeedBackSheetController>();
+  bool disable = false;
   bool validate() {
     return _formKey.currentState!.validate();
   }
@@ -162,7 +163,7 @@ class _FeedBackScreen1State extends State<FeedBackScreen1> {
                         FeedBackLabel(
                           text: 'Alert Error',
                           onTap: () {
-                            _controller.issue = 'QR Code';
+                            _controller.issue = 'Alert Error';
                             _controller.counter = -2;
                             Timer(const Duration(seconds: 2), () {
                               _controller.counter = 3;
@@ -214,7 +215,7 @@ class _FeedBackScreen1State extends State<FeedBackScreen1> {
               ],
 
               if(_controller.counter == 3 || _controller.counter == 2)...[
-                sendButton(),
+                sendButton(context),
                 const SizedBox(height: 12,)
               ]
 
@@ -225,18 +226,24 @@ class _FeedBackScreen1State extends State<FeedBackScreen1> {
     );
   }
 
-  Widget sendButton(){
+  Widget sendButton(BuildContext context){
     return Center(
       child: SizedBox(
         width: 171,
         height: 37,
         child: TextButton(
-          onPressed: () {
-            _controller.pageIndex = 2;
+          onPressed: disable ? null:() {
+            setState(() {
+              disable = true;
+            });
+            _controller.submit(context);
           },
           style: TextButton.styleFrom(
             padding: const EdgeInsets.all(10),
             backgroundColor: const Color.fromRGBO(255, 244, 237, 1),
+            foregroundColor: const Color.fromRGBO(253, 71, 18, 1),
+            disabledBackgroundColor: const Color.fromRGBO(235, 233, 252, 1),
+            disabledForegroundColor: const Color.fromRGBO(48, 48, 48, 1),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(4)
             )
@@ -246,7 +253,6 @@ class _FeedBackScreen1State extends State<FeedBackScreen1> {
             style: GoogleFonts.inter(
               fontWeight: FontWeight.w600,
               fontSize: 14,
-              color: const Color.fromRGBO(253, 71, 18, 1)
             ),
           ),
         ),

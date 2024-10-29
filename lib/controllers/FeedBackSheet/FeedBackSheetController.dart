@@ -1,9 +1,16 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:restuarant_pager_app/controllers/UserController/UserController.dart';
+import 'package:restuarant_pager_app/firebase/AuthMethods/AuthMethods.dart';
 import 'package:restuarant_pager_app/models/FeedBack/FeedBack.model.dart';
+import 'package:dio/dio.dart' as dio;
+import 'package:restuarant_pager_app/utils/toastMessage.dart';
 
 class FeedBackSheetController extends GetxController {
   final model = Get.put(FeedBackModel()).obs;
+  final userController = Get.find<UserController>();
+  dio.Dio _dio = dio.Dio(); 
   final RxInt _pageIndex = 0.obs;
   final RxInt _counter = 0.obs;
 
@@ -16,7 +23,6 @@ class FeedBackSheetController extends GetxController {
 
   @override
   onInit(){
-    final userController = Get.find<UserController>();
     model.value.name = userController.name;
     model.value.email = userController.email;
     super.onInit();
@@ -67,8 +73,46 @@ class FeedBackSheetController extends GetxController {
     return "Please enter a valid Email address.";
   }
 
-  Future<void> submit() async {
-    if(message == null || message!.isEmpty) return;
+  Future<void> submit(BuildContext context) async {
+    if (message == null || message!.isEmpty || message!.length < 20) return;
 
+    try {
+      final data = {
+        'user': userController.id,
+        'name': name,
+        'email': email,
+        'about': about,
+        'issue': issue,
+        'message': message,
+      };
+
+      final response = await _dio.post(
+        "$host/feedback/",
+        data: data,
+        options: dio.Options(
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        ),
+      );
+
+      if (response.statusCode == 201) {
+        pageIndex = 2; // greet the user for feedback
+      } else {
+        if (context.mounted) {
+          Navigator.of(context).pop(); // close feedback sheet
+          if (kDebugMode) debugPrint('inside feedback submit function , Error : ${response.statusMessage}');
+          showToastMessage(context,
+              "unable to send feedback, Try again later"); // show message
+        }
+      }
+    } catch (error) {
+      if (context.mounted) {
+        Navigator.of(context).pop(); // close feedback sheet
+        if (kDebugMode) debugPrint('inside feedback submit function , Error : $error');
+        showToastMessage(context,
+            "unable to send feedback, Try again later"); // show message
+      }
+    }
   }
 }
