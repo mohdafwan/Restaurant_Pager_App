@@ -24,17 +24,24 @@ class ScannerScreen extends StatelessWidget {
     qrCodeController.fetchCurrentUserDetails();
   }
 
-  final String apiKey = "your-api-key-here"; // Your API key for encryption
+  final String apiKey = 'HKSJVpYHoYPOXhQpLcqEKTqIGYt82rzp'; // Your API key for encryption
 
-  // Encrypt the user data
-  String encryptData(String data, String apiKey) {
-    final key =
-        encrypt.Key.fromUtf8(apiKey.padRight(32, '0')); // Ensure 32 chars
-    final iv = encrypt.IV.fromLength(16); // 16-byte initialization vector
-    final encrypter = encrypt.Encrypter(encrypt.AES(key));
-    final encrypted = encrypter.encrypt(data, iv: iv);
-    return encrypted.base64; // Return base64 encoded encrypted data
-  }
+// Encrypt the user data
+String encryptData(String data, String apiKey) {
+  final key =
+      encrypt.Key.fromUtf8(apiKey.padRight(32, '0')); // Ensure 32 chars
+  final iv = encrypt.IV.fromLength(16); // 16-byte initialization vector
+  final encrypter = encrypt.Encrypter(encrypt.AES(key));
+  final encrypted = encrypter.encrypt(data, iv: iv);
+
+  // Combine the IV and encrypted data
+  final ivBase64 = iv.base64; // Encode IV in base64
+  final encryptedData = encrypted.base64; // Encode encrypted data in base64
+
+  // Return both IV and encrypted data separated by a colon
+  return '$ivBase64:$encryptedData';
+}
+
 
   // Generate QR code data with encrypted user info
   String generateQrCodeData(
