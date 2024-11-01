@@ -9,21 +9,16 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:flutter/rendering.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:restuarant_pager_app/controllers/UserController/UserController.dart';
 import 'package:restuarant_pager_app/controllers/dashboard_controller/dashboard_controller.dart';
 import 'package:restuarant_pager_app/utils/toastMessage.dart';
 import 'package:restuarant_pager_app/views/FeedBack/FeedBackSheet.dart';
 import 'package:restuarant_pager_app/views/main_screens/scanner_screen/components/QrCodePainter.dart';
 import 'package:share_plus/share_plus.dart';
-import '../../../controllers/QrCodeController/qr_code_controller.dart';
 import 'package:encrypt/encrypt.dart' as encrypt;
 
 class ScannerScreen extends StatelessWidget {
-  final QRCodeController qrCodeController = Get.put(QRCodeController());
-
-  ScannerScreen({super.key}) {
-    qrCodeController.fetchCurrentUserDetails();
-  }
-
+  final userController = Get.find<UserController>();
   final String apiKey = 'HKSJVpYHoYPOXhQpLcqEKTqIGYt82rzp'; // Your API key for encryption
 
 // Encrypt the user data
@@ -45,11 +40,11 @@ String encryptData(String data, String apiKey) {
 
   // Generate QR code data with encrypted user info
   String generateQrCodeData(
-      String name, String email, String phone, String apiKey) {
+      String name, String email, String uid, String apiKey) {
     final data = jsonEncode({
       'name': name,
       'email': email,
-      'phone': phone,
+      'uid': uid,
     });
     return encryptData(data, apiKey);
   }
@@ -203,14 +198,11 @@ Future<void> _shareQrCode(GlobalKey key) async {
                   elevation: 0,
                   color: Colors.white,
                   child: Obx(() {
-                    if (qrCodeController.userName.value.isEmpty) {
-                      return const CircularProgressIndicator(); // Show a loading indicator
-                    } else {
                       // Generate encrypted data for QR code
                       String encryptedData = generateQrCodeData(
-                        qrCodeController.userName.value,
-                        qrCodeController.userEmail.value,
-                        qrCodeController.userPhone.value,
+                        userController.name!,
+                        userController.email!,
+                        userController.id!.toString(),
                         apiKey,
                       );
 
@@ -220,9 +212,7 @@ Future<void> _shareQrCode(GlobalKey key) async {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              qrCodeController.userName.value.isNotEmpty
-                                  ? qrCodeController.userName.value
-                                  : "User Name",
+                              userController.name!,
                               style: const TextStyle(
                                   fontSize: 24, fontWeight: FontWeight.bold),
                             ),
@@ -244,7 +234,7 @@ Future<void> _shareQrCode(GlobalKey key) async {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
-                                  "ID : ${qrCodeController.userId.value}",
+                                  "ID : ${userController.id}",
                                   style: GoogleFonts.inter(
                                       fontWeight: FontWeight.w500,
                                       fontSize: 20),
@@ -252,7 +242,7 @@ Future<void> _shareQrCode(GlobalKey key) async {
                                 IconButton(
                                   padding: const EdgeInsets.all(0),
                                   onPressed: () {
-                                    Clipboard.setData(ClipboardData(text: qrCodeController.userId.value.toString()));
+                                    Clipboard.setData(ClipboardData(text: userController.uid!));
                                     showToastMessage(context, "ID copied to clipboard!");
                                   },
                                   icon: const Icon(
@@ -266,7 +256,6 @@ Future<void> _shareQrCode(GlobalKey key) async {
                           ],
                         ),
                       );
-                    }
                   }),
                 ),
               ),
