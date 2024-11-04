@@ -22,7 +22,12 @@ class SignUpController extends GetxController {
   @override
   void onInit(){
     super.onInit();
-    signUpModel.value.phoneNumber = PhoneNumberModel(phoneNumber: phoneNumberController.phoneNumber, countryCode: phoneNumberController.selectedCountryCode,);
+    signUpModel.value.phoneNumber = PhoneNumberModel(
+      phoneNumber: phoneNumberController.phoneNumber ??
+          userController.currentUser.value.phone?.phoneNumber,
+      countryCode: userController.currentUser.value.phone?.countryCode ??
+          phoneNumberController.selectedCountryCode,
+    );
     signUpModel.value.name = userController.name;
     emailController.emailAddress = userController.email;
     signUpModel.value.email = emailController.emailAddress;

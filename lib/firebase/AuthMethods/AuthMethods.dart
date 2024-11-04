@@ -358,7 +358,7 @@ Future<ResponseModel> signInUsingPhoneNumber() async {
         'password':"temp"
       };
 
-      final response = await _dio.post(
+      final response = await _dio.put(
         '${routes['update_user']!}${userController.id}/',
         data: data,
         options: dio.Options(
