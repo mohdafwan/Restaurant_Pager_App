@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:restuarant_pager_app/constants/ColorPalette.dart';
+import 'package:restuarant_pager_app/views/TermsAndCondition/TermsAndConditonView.dart';
 
 class TermsAndConditons extends StatelessWidget {
   const TermsAndConditons({super.key});
@@ -34,7 +35,7 @@ class TermsAndConditons extends StatelessWidget {
             ),
             recognizer: TapGestureRecognizer()
               ..onTap = () {
-                // handle terms and conditions tap
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => const TermsAndConditionView()));
               },
           ),
           const TextSpan(
