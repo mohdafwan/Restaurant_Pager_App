@@ -12,7 +12,6 @@ import 'package:restuarant_pager_app/views/EditProfileView/components/EditProfil
 import 'package:restuarant_pager_app/views/VerifyEmailUsingOTP/VerifyEmailUsingOTP.dart';
 import 'package:restuarant_pager_app/widgets/Button.dart';
 
-
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({super.key});
 
@@ -31,13 +30,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
     super.initState();
   }
 
-  void _submitForm(){
-    if(!_formKey.currentState!.validate()) return;
-    setState((){
+  void _submitForm() {
+    if (!_formKey.currentState!.validate()) return;
+    setState(() {
       clicked = true;
     });
     Get.to(() => const VerifyEmailUsingOTP());
-    setState((){
+    setState(() {
       clicked = false;
     });
   }
@@ -49,9 +48,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
       onPopInvokedWithResult: (didPop,_) async {
         debugPrint("inside popscope : $didPop");
         if (!didPop) {
-          Get.find<DashboardController>().changeTabIndex(2); 
+          Get.find<DashboardController>().changeTabIndex(2);
         }
       },
+      // onPopInvoked: (didPop) {
+      //   if (!didPop) {
+      //     Get.find<DashboardController>().changeTabIndex(2);
+      //   }
+      // },
       child: Scaffold(
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
@@ -67,13 +71,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       clipper: CurvedContainer(),
                       child: Container(
                         color: const Color.fromRGBO(247, 249, 250, 1),
-                        height:161, 
+                        height: 161,
                       ),
                     ),
                     const Positioned(
                       top: 111,
                       left: 0,
-                      right: 0, 
+                      right: 0,
                       child: Center(
                         child: EditProfilePicField(),
                       ),
@@ -89,22 +93,34 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      SizedBox(height: 7.4,),
+                      SizedBox(
+                        height: 7.4,
+                      ),
                       // name field
                       EditProfileNameField(),
-                      SizedBox(height: 18,),
+                      SizedBox(
+                        height: 18,
+                      ),
                       // date field
                       EditProfileDateField(),
-                      SizedBox(height: 18,),
+                      SizedBox(
+                        height: 18,
+                      ),
                       // gender field
                       EditProfileGenderField(),
-                      SizedBox(height: 18,),
+                      SizedBox(
+                        height: 18,
+                      ),
                       // phone field
                       EditProfilePhoneNoField(),
-                      SizedBox(height: 18,),
+                      SizedBox(
+                        height: 18,
+                      ),
                       // email field
                       EditProfileEmailField(),
-                      SizedBox(height: 32,),
+                      SizedBox(
+                        height: 32,
+                      ),
                     ],
                   ),
                 ),

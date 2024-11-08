@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:restuarant_pager_app/firebase/AuthMethods/AuthMethods.dart';
 import 'package:restuarant_pager_app/controllers/dashboard_controller/dashboard_controller.dart';
 import '../../widgets/alert_dialog.dart';
+import '../FeedBack/FeedBackSheet.dart';
+import '../main_screens/home_screen/componentes/refer_card.dart';
+import 'components/profile_card.dart';
 import 'components/setting_group.dart';
 import 'components/setting_tile.dart';
 
@@ -31,17 +33,20 @@ class SettingsPagex extends StatelessWidget {
               )),
         ),
         backgroundColor: Colors.white,
-        title: const Text(
-          'Settings',
-          style: TextStyle(fontWeight: FontWeight.w900, fontSize: 24),
-        ),
+        // title: const Text(
+        //   'Settings',
+        //   style: TextStyle(fontWeight: FontWeight.w900, fontSize: 24),
+        // ),
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-             SettingsGroup(
+            const SizedBox(height: 16),
+            ProfileCard(),
+            const SizedBox(height: 16),
+            SettingsGroup(
               settingsGroupTitle: 'Account',
               items: [
                 SettingTile(
@@ -54,28 +59,28 @@ class SettingsPagex extends StatelessWidget {
                 SettingTile(
                   title: 'Notification',
                   icon: Icons.notifications_none_rounded,
-                   onTap: () {
+                  onTap: () {
                     Get.toNamed("/onsettingnotification");
+                  },
+                ),
+                SettingTile(
+                  title: 'FAQ',
+                  icon: Icons.help_outline,
+                  onTap: () {
+                    Get.toNamed("/faq");
                   },
                 ),
               ],
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 16),
             SettingsGroup(
               settingsGroupTitle: 'More',
               items: [
                 SettingTile(
-                  title: 'Rate & Review',
-                  icon: Icons.star_border_rounded,
+                  title: 'Send Feedback',
+                  icon: Icons.feedback_outlined,
                   onTap: () {
-                    Get.toNamed('/onsettingrate&review');
-                  },
-                ),
-                SettingTile(
-                  title: 'Help',
-                  icon: Icons.help_outline_rounded,
-                  onTap: () {
-                    Get.toNamed('/onsettinghelp');
+                    showFeedBackForm(context);
                   },
                 ),
                 SettingTile(
@@ -85,27 +90,32 @@ class SettingsPagex extends StatelessWidget {
                     Get.find<DashboardController>().changeTabIndex(5);
                   },
                 ),
+                SettingTile(
+                  title: 'Ticket History',
+                  icon: Icons.history_outlined,
+                  onTap: () {
+                    Get.toNamed('/tickethistorypage');
+                  },
+                ),
+                SettingTile(
+                  title: 'About',
+                  icon: Icons.info_outline,
+                  onTap: () {
+                    Get.toNamed('/about');
+                  },
+                ),
+                SettingTile(
+                  title: 'Sign Out',
+                  icon: Icons.logout_outlined,
+                  onTap: () {
+                    showCustomAlertDialog(context);
+                  },
+                ),
               ],
             ),
-            const Spacer(),
-            Center(
-              child: TextButton(
-                onPressed: () {
-                  showCustomAlertDialog(context);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(0).copyWith(bottom: 10),
-                  child: Text(
-                    'Log Out',
-                    style: GoogleFonts.inter(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 14,
-                      color: const Color.fromRGBO(151, 156, 158, 1)
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            const SizedBox(height: 16),
+            const ReferFriendCard(),
+            const SizedBox(height: 16),
           ],
         ),
       ),
@@ -123,7 +133,6 @@ void showCustomAlertDialog(BuildContext context) {
         icon: Icons.logout,
         subtitle: 'Are you sure you want to log out?',
         onYesPressed: () {
-          // Handle Yes button action
           Get.find<AuthMethods>().signOut();
         },
         onNoPressed: () {
@@ -132,8 +141,7 @@ void showCustomAlertDialog(BuildContext context) {
         },
         yesButtonText: 'Yes',
         noButtonText: 'No',
-        backgroundColor:
-            Colors.orange[200], // Custom background color if needed
+        backgroundColor: Colors.orange[200],
       );
     },
   );

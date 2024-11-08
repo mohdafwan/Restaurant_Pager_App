@@ -10,6 +10,12 @@ import 'package:restuarant_pager_app/views/pages/onboarding/boarding_screen.dart
 import 'package:restuarant_pager_app/views/setting/setting_page.dart';
 import 'package:restuarant_pager_app/views/tickets/raise_ticket.dart';
 
+import '../views/FrequentlyAskedQuestion/FrequentlyAskedQuestion.dart';
+import '../views/Privacy/Privacy.dart';
+import '../views/TermsAndCondition/TermsAndConditonView.dart';
+import '../views/setting/about_page.dart';
+import '../views/tickets/ticket_history.dart';
+
 class AppRoutes {
   static final routes = [
     GetPage(
@@ -36,7 +42,7 @@ class AppRoutes {
       transition: Transition.downToUp,
       transitionDuration: const Duration(milliseconds: 300),
     ),
-     GetPage(
+    GetPage(
       name: '/orderview',
       page: () => OrderHistoryView(),
       transition: Transition.rightToLeft,
@@ -48,7 +54,7 @@ class AppRoutes {
       transition: Transition.rightToLeft,
       transitionDuration: const Duration(milliseconds: 250),
     ),
-    
+
     // ----------SettingScreen Routes
     // GetPage(
     //   name: '/onsettingprofile',
@@ -78,6 +84,35 @@ class AppRoutes {
       transitionDuration: const Duration(milliseconds: 250),
       page: () => const SubmitIssuePage(),
     ),
-    
+    GetPage(
+      name: '/faq',
+      transition: Transition.rightToLeft,
+      transitionDuration: const Duration(milliseconds: 250),
+      page: () => const FrequentlyAskedQuestion(),
+    ),
+    GetPage(
+      name: '/t&c',
+      transition: Transition.rightToLeft,
+      transitionDuration: const Duration(milliseconds: 250),
+      page: () => const TermsAndConditionView(),
+    ),
+    GetPage(
+      name: '/privacy',
+      transition: Transition.rightToLeft,
+      transitionDuration: const Duration(milliseconds: 250),
+      page: () => const PrivacyPoliciesView(),
+    ),
+    GetPage(
+      name: '/about',
+      transition: Transition.rightToLeft,
+      transitionDuration: const Duration(milliseconds: 250),
+      page: () => const AboutPage(),
+    ),
+    GetPage(
+      name: '/tickethistorypage',
+      transition: Transition.rightToLeft,
+      transitionDuration: const Duration(milliseconds: 250),
+      page: () => TicketHistoryPage(),
+    ),
   ];
 }
