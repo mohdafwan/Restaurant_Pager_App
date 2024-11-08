@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import '../views/tickets/ticket_history.dart';
-
 class TicketSubmitPopup extends StatelessWidget {
   final String ticketId;
 
@@ -54,7 +50,7 @@ class TicketSubmitPopup extends StatelessWidget {
               top: 0,
               child: GestureDetector(
                 onTap: () {
-                  Get.offAll(() => TicketHistoryPage());
+                  Navigator.of(context).pop();
                 },
                 child: CircleAvatar(
                   radius: 12,

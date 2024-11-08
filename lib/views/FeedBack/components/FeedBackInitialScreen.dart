@@ -117,7 +117,7 @@ Widget FeedBackInitialScreen(BuildContext context) {
                       color: const Color.fromRGBO(253, 71, 18, 1)),
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
-                      // handle tap privacy policy
+                      Get.toNamed('/privacy');
                     },
                 ),
                 TextSpan(
@@ -135,7 +135,7 @@ Widget FeedBackInitialScreen(BuildContext context) {
                       color: const Color.fromRGBO(253, 71, 18, 1)),
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
-                      // handle tap terms and condition
+                      Get.toNamed('/t&c');
                     },
                 ),
                 TextSpan(

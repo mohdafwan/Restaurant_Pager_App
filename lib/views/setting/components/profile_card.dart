@@ -51,7 +51,7 @@ class ProfileCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  userController.id?.toString() ?? "ID",
+                  "#${userController.id}",
                   style: const TextStyle(
                     fontSize: 14,
                     color: Color(0xff1E1E1E),
@@ -63,13 +63,13 @@ class ProfileCard extends StatelessWidget {
           const SizedBox(width: 16),
           userController.profilePic == null
               ? SvgPicture.asset(
-                  "assets/homeImages/avatars.svg",
+                  "assets/homeImages/person_avatar.svg",
                   width: 60,
                   height: 60,
                 )
               : CircleAvatar(
                   radius: 30,
-                  foregroundImage: AssetImage(userController.profilePic!),
+                  foregroundImage: NetworkImage(userController.profilePic!),
                 ),
         ],
       ),

@@ -5,7 +5,7 @@ import 'package:restuarant_pager_app/models/tickets/ticket_model.dart';
 class TicketItem extends StatelessWidget {
   final Ticket ticket;
 
-  const TicketItem({required this.ticket});
+  const TicketItem({super.key, required this.ticket});
 
   @override
   Widget build(BuildContext context) {

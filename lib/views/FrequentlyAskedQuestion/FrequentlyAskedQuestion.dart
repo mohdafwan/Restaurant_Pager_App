@@ -33,13 +33,13 @@ class FrequentlyAskedQuestion extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         centerTitle: true,
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1.0),
-          child: Container(
-            color: const Color.fromRGBO(234, 236, 240, 1),
-            height: 1.0,
-          ),
-        ),
+        // bottom: PreferredSize(
+        //   preferredSize: const Size.fromHeight(1.0),
+        //   child: Container(
+        //     color: const Color.fromRGBO(234, 236, 240, 1),
+        //     height: 1.0,
+        //   ),
+        // ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(

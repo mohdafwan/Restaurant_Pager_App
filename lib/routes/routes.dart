@@ -108,11 +108,5 @@ class AppRoutes {
       transitionDuration: const Duration(milliseconds: 250),
       page: () => const AboutPage(),
     ),
-    GetPage(
-      name: '/tickethistorypage',
-      transition: Transition.rightToLeft,
-      transitionDuration: const Duration(milliseconds: 250),
-      page: () => TicketHistoryPage(),
-    ),
   ];
 }

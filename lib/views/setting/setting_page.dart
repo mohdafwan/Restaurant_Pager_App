@@ -16,6 +16,7 @@ class SettingsPagex extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        surfaceTintColor: Colors.transparent,
         centerTitle: false,
         automaticallyImplyLeading: false,
         leading: SizedBox(
@@ -54,6 +55,7 @@ class SettingsPagex extends StatelessWidget {
                   icon: Icons.person_outline_rounded,
                   onTap: () {
                     Get.find<DashboardController>().changeTabIndex(3);
+
                   },
                 ),
                 SettingTile(
@@ -94,7 +96,7 @@ class SettingsPagex extends StatelessWidget {
                   title: 'Ticket History',
                   icon: Icons.history_outlined,
                   onTap: () {
-                    Get.toNamed('/tickethistorypage');
+                    Get.find<DashboardController>().changeTabIndex(6);
                   },
                 ),
                 SettingTile(

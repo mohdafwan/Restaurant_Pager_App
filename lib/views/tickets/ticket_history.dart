@@ -1,11 +1,9 @@
-// views/ticket_history_page.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:restuarant_pager_app/controllers/dashboard_controller/dashboard_controller.dart';
 import 'package:restuarant_pager_app/controllers/tickets/ticket_history_controller.dart';
 import 'package:restuarant_pager_app/widgets/ticket_history_card.dart';
-
 import '../../controllers/notification/notification_settrings_controller.dart';
-import '../notifaicatio/notifaication_view_page.dart';
 
 class TicketHistoryPage extends StatelessWidget {
   final TicketController controller = Get.put(TicketController());
@@ -20,6 +18,7 @@ class TicketHistoryPage extends StatelessWidget {
       child: Scaffold(
         backgroundColor: const Color(0xfff7f9fa),
         appBar: AppBar(
+          surfaceTintColor: Colors.transparent,
           backgroundColor: const Color(0xfff7f9fa),
           title: const Text(
             'Ticket history',
@@ -28,27 +27,8 @@ class TicketHistoryPage extends StatelessWidget {
           centerTitle: true,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
-            onPressed: () => Get.back(),
+            onPressed: () => Get.find<DashboardController>().changeTabIndex(2),
           ),
-          actions: [
-            //add settings page
-            IconButton(
-              icon: const Icon(Icons.settings),
-              onPressed: () {
-                //TODO: Get.to(() => SettingsPage()); sync with the pages
-                // Get.to(() => SettingsPage());
-              },
-            ),
-            IconButton(
-              icon: const Icon(Icons.notification_add),
-              onPressed: () {
-                //get.to NotificationView
-                Get.to(NotificationView(
-                  notificationsList: settingsController.notificationsList,
-                ));
-              },
-            ),
-          ],
         ),
         body: Obx(() {
           return ListView.builder(
@@ -65,24 +45,6 @@ class TicketHistoryPage extends StatelessWidget {
             },
           );
         }),
-        bottomNavigationBar: BottomNavigationBar(
-          items: [
-            const BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            const BottomNavigationBarItem(
-              icon: Icon(Icons.document_scanner_rounded),
-              label: "",
-            ),
-            const BottomNavigationBarItem(
-              icon: Icon(Icons.history),
-              label: 'History',
-            ),
-          ],
-          currentIndex: 0, // Set the current index as per your app flow
-          onTap: (index) {},
-        ),
       ),
     );
   }
