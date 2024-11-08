@@ -32,6 +32,7 @@ class FrequentlyAskedQuestion extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
+        surfaceTintColor: Colors.transparent,
         centerTitle: true,
         // bottom: PreferredSize(
         //   preferredSize: const Size.fromHeight(1.0),

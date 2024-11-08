@@ -14,7 +14,6 @@ import '../views/FrequentlyAskedQuestion/FrequentlyAskedQuestion.dart';
 import '../views/Privacy/Privacy.dart';
 import '../views/TermsAndCondition/TermsAndConditonView.dart';
 import '../views/setting/about_page.dart';
-import '../views/tickets/ticket_history.dart';
 
 class AppRoutes {
   static final routes = [
@@ -66,7 +65,7 @@ class AppRoutes {
     // ),
     GetPage(
       name: '/onsettingnotification',
-      page: () => NotificationsSettingsPage(),
+      page: () => const NotificationsSettingsPage(),
       transition: Transition.rightToLeft,
       transitionDuration: const Duration(milliseconds: 250),
     ),
