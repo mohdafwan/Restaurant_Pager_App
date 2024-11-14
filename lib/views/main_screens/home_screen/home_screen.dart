@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:restuarant_pager_app/controllers/UserController/UserController.dart';
 import 'package:restuarant_pager_app/controllers/dashboard_controller/dashboard_controller.dart';
 import 'package:restuarant_pager_app/controllers/pages_controller/home_controller/home_controller.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:logger/logger.dart';
 
 import 'componentes/refer_card.dart';
