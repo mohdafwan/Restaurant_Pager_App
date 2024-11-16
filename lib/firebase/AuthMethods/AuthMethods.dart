@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -19,9 +22,11 @@ class AuthMethods {
   final _authGoogle = GoogleSignIn(scopes: [
         "email", // only request email
       ]);
-  final UserController userController = Get.put(UserController(),permanent: true);
+  final UserController _userController = Get.put(UserController(),permanent: true);
   final dio.Dio _dio = dio.Dio();
   bool loggedIn = false;
+  bool justLoggedIn = false;
+  late String fcmToken;
 
   Stream<User?> get authChanges => _auth.authStateChanges();
   User? get user => _auth.currentUser;
@@ -30,7 +35,9 @@ class AuthMethods {
     "create_user": "$host/user/",
     "get_user": "$host/user_check/",
     "email_otp": "$host/otp/",
-    "update_user": "$host/user/"
+    "update_user": "$host/user/",
+    "start_session": "$host/startsession/",
+    "logout":"$host/logoutsession/"
   };
 
   Future<ResponseModel> signInWithGoogle() async {
@@ -56,7 +63,7 @@ class AuthMethods {
       User? user = userCredential.user;
 
       if (user != null) {
-        userController.updateUserDetails(
+        _userController.updateUserDetails(
             uid: user.uid, email: user.email, name: user.displayName);
         res = "success";
       }
@@ -68,7 +75,7 @@ class AuthMethods {
 
 Future<ResponseModel> signInUsingPhoneNumber() async {
   final otpController = Get.find<OTPController>();
-  final userController = Get.find<UserController>();
+  final _userController = Get.find<UserController>();
   String res = "some error occurred";
 
   try {
@@ -83,7 +90,7 @@ Future<ResponseModel> signInUsingPhoneNumber() async {
       final userCredential = await _auth.signInWithCredential(credential);
       User? _user = userCredential.user;
       if (_user != null) {
-        userController.updateUserDetails(uid: _user.uid);
+        _userController.updateUserDetails(uid: _user.uid);
         res = "success";
       }
     } else {
@@ -200,7 +207,7 @@ Future<ResponseModel> signInUsingPhoneNumber() async {
 
       if (response.statusCode == 201) {
         loggedIn = true;
-        userController.updateUserDetails(id: response.data['id']);
+        _userController.updateUserDetails(id: response.data['id']);
         res = "success";
       } else {
         res = response.statusMessage ?? res;
@@ -227,8 +234,8 @@ Future<ResponseModel> signInUsingPhoneNumber() async {
         }
 
         if (response.message == "success") {
-          userController.setUser(response.data);
-          userController.updateUserDetails(uid: user!.uid);
+          _userController.setUser(response.data);
+          _userController.updateUserDetails(uid: user!.uid);
           loggedIn = true;
           res = "success";
         } else {
@@ -359,7 +366,7 @@ Future<ResponseModel> signInUsingPhoneNumber() async {
       };
 
       final response = await _dio.put(
-        '${routes['update_user']!}${userController.id}/',
+        '${routes['update_user']!}${_userController.id}/',
         data: data,
         options: dio.Options(
           headers: {
@@ -379,12 +386,66 @@ Future<ResponseModel> signInUsingPhoneNumber() async {
     return ResponseModel(message: res);
   }
 
+    Future<ResponseModel> startSession() async {
+    String res = "some error occurred";
+    try {
+      String model, platform;
+      DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+      if (Platform.isAndroid) {
+        platform = "android";
+        final device = await deviceInfo.androidInfo;
+        model = device.model;
+      } else if (Platform.isIOS) {
+        platform = "ios";
+        final device = await deviceInfo.iosInfo;
+        model = device.model;
+      } else {
+        return ResponseModel(message: "device not supported");
+      }
+      final data = {
+        "device": model,
+        "id": _userController.id,
+        "platform": platform,
+        "fcm_token": fcmToken,
+        "active": true, // mark true in start
+      };
+      final response = await _dio.post(
+        routes["start_session"]!,
+        data: data,
+        options: dio.Options(
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        ),
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        res = "success";
+      }
+    } catch (error) {
+      res = error.toString();
+    }
+    return ResponseModel(message: res);
+  }
+
   Future<ResponseModel> signOut() async {
     String res = "some error occurred";
     try {
-      _auth.signOut();
-      _authGoogle.signOut();
-      userController.clearUserData();
+      await _auth.signOut();
+      await _authGoogle.signOut();
+      _userController.clearUserData();
+      // send request to backend to end the session
+      await _dio.post(
+        routes['logout']!,
+        data: {
+          "id": _userController.id,
+          "fcm_token": fcmToken,
+        },
+        options: dio.Options(
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        ),
+      );
       res = "success";
     } catch (error) {
       res = error.toString();

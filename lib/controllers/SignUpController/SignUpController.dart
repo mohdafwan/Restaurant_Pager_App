@@ -83,6 +83,7 @@ void submit() async {
   // storing user data in backend
   final res = await _authMethods.createAccount(userData.user);
   if(res.message == "success"){
+    await _authMethods.startSession();
     Get.offAllNamed('/dashboard');
   } else {
       if (kDebugMode) debugPrint(res.message!);
