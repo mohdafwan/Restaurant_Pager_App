@@ -27,8 +27,9 @@ class SplashScreenController extends GetxController {
         try {
           final ResponseModel response = await authMethods.getUserData();
           if (response.message == "success") {
-            // User data found, navigate to dashboard
-            // todo : send fcm token to backend
+            if(authMethods.justLoggedIn){
+              authMethods.startSession();
+            }
             Get.find<DashboardController>().tabIndex.value = 0; // making user land on home screen
             Get.offAllNamed('/dashboard');
           } else if(userController.phoneNumber != null){

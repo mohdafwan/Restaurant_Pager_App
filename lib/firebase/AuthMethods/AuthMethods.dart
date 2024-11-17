@@ -65,6 +65,7 @@ class AuthMethods {
       if (user != null) {
         _userController.updateUserDetails(
             uid: user.uid, email: user.email, name: user.displayName);
+        justLoggedIn = true;
         res = "success";
       }
     } on FirebaseAuthException catch (error) {
@@ -75,7 +76,6 @@ class AuthMethods {
 
 Future<ResponseModel> signInUsingPhoneNumber() async {
   final otpController = Get.find<OTPController>();
-  final _userController = Get.find<UserController>();
   String res = "some error occurred";
 
   try {
@@ -91,6 +91,7 @@ Future<ResponseModel> signInUsingPhoneNumber() async {
       User? _user = userCredential.user;
       if (_user != null) {
         _userController.updateUserDetails(uid: _user.uid);
+        justLoggedIn = true;
         res = "success";
       }
     } else {
