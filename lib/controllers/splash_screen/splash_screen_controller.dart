@@ -6,12 +6,26 @@ import 'package:restuarant_pager_app/firebase/AuthMethods/AuthMethods.dart';
 import 'package:restuarant_pager_app/models/ResponseModel/ResponseModel.dart';
 import 'package:restuarant_pager_app/views/LinkAccountPage/LinkAccountPage.dart';
 import 'package:restuarant_pager_app/views/UpdateNumberDetails/UpdateNumberDetails.dart';
+import 'package:uni_links2/uni_links.dart';
 
 class SplashScreenController extends GetxController {
   @override
-  void onReady() {
+  void onReady() async {
+    await _handleDeepLinks();
     _initializeApp();
     super.onReady();
+  }
+  
+  Future<void> _handleDeepLinks() async {
+    uriLinkStream.listen((Uri? uri) {
+      if (uri != null) {
+        print("referralCode : ${uri.queryParameters['code']}");
+      }
+    });
+    final Uri? initialUri = await getInitialUri();
+    if (initialUri != null) {
+      print("referralCode : ${initialUri.queryParameters['code']}");
+    }
   }
 
   Future<void> _initializeApp() async {

@@ -44,6 +44,8 @@ dependencies:
   win32: ^5.6.1
   super_tooltip: ^2.0.8
   device_info_plus: ^10.1.2
+  web_socket_channel: ^3.0.1
+  uni_links2: ^0.6.0+2
 
 
 dev_dependencies:

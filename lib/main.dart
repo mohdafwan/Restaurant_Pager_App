@@ -13,17 +13,20 @@ import 'firebase/firebase_api.dart';
 import 'firebase_options.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  await initApp();
+  runApp(const MyApp());
+}
+
+Future<void> initApp() async {
+    WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
   Get.put(NotificationsSettingsController());
-  await FirebaseApi().initNotifications();
-  FirebaseAuth.instance.setLanguageCode('en');
   Get.put(DashboardController(), permanent: true);
   Get.put(AuthMethods(), permanent: true);
-  runApp(const MyApp());
+  await FirebaseApi().initNotifications();
+  FirebaseAuth.instance.setLanguageCode('en');
 }
 
 class MyApp extends StatelessWidget {

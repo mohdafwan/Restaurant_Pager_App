@@ -16,6 +16,7 @@ import 'package:restuarant_pager_app/views/LinkAccountPage/components/AccountCar
 // http://10.0.2.2:8000 for emulation
 // replace with your machine ip address to test on real device
 const host = "http://192.168.29.88:8000";
+const wsHost = "ws://192.168.29.88:8000";
 
 class AuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;

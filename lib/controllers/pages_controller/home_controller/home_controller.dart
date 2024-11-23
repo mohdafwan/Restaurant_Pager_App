@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 
 import 'package:restuarant_pager_app/models/home/corrent_order_ststus_model.dart';
 
-class CurrentOrderController extends GetxController {
+class OrderController extends GetxController {
   var isLoading = true.obs; // Loading state
   var hasError = false.obs; // Error state
   var errorMessage = ''.obs; // Error message

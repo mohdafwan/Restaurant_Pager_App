@@ -1,10 +1,14 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:restuarant_pager_app/controllers/UserController/UserController.dart';
 import 'package:restuarant_pager_app/controllers/dashboard_controller/dashboard_controller.dart';
-import 'package:restuarant_pager_app/controllers/pages_controller/home_controller/home_controller.dart';
-import 'package:logger/logger.dart';
+import 'package:restuarant_pager_app/controllers/pages_controller/OrderHistoryController/OrderHistoryController.dart';
+import 'package:restuarant_pager_app/views/main_screens/home_screen/componentes/HoverButton.dart';
+import 'package:restuarant_pager_app/widgets/CustomCircularProgressIndicator.dart';
 
 import 'componentes/refer_card.dart';
 
@@ -16,9 +20,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  var logger = Logger();
-  CurrentOrderController currentOrders = Get.put(CurrentOrderController());
+  final orderController = Get.put(OrderHistoryController());
   final userController = Get.find<UserController>();
+  final dashBoardController = Get.find<DashboardController>();
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const Row(
                 children: [
                   Text(
-                    "Current order status",
+                    "Active orders",
                     style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -79,79 +83,65 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const SizedBox(height: 10),
 
-              Expanded(
-                child: Obx(() {
-                  if (currentOrders.isLoading.value) {
-                    // Loading state
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (currentOrders.hasError.value) {
-                    // Error state
-                    return Center(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Icon(Icons.error_outline,
-                              size: 60, color: Colors.red),
-                          const SizedBox(height: 10),
-                          Text(currentOrders.errorMessage.value,
-                              style: const TextStyle(
-                                  fontSize: 18, color: Colors.black)),
-                        ],
-                      ),
-                    );
-                  } else if (currentOrders.currentOrder.isEmpty) {
-                    // No data state (empty list)
-                    return const Center(
-                      child: Text('No orders found',
-                          style: TextStyle(fontSize: 18)),
-                    );
-                  } else {
-                    // Data state (display list of orders)
-                    return ListView.builder(
-                        itemCount: currentOrders.currentOrder.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          final order = currentOrders.currentOrder[index];
-                          return CurrentOrderTile(
-                            title: order.restaurantName,
-                            place: order.place,
-                            status: order.status,
-                          );
-                        });
-                  }
-                }),
-              ),
+              Obx(() {
+                if (orderController.isLoading.value) {
+                  // Loading state
+                  return const Center(
+                      child: CustomCircularProgressIndicator());
+                } else if (orderController.hasError.value) {
+                  // Error state
+                  return Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(Icons.error_outline,
+                            size: 60, color: Colors.red),
+                        const SizedBox(height: 10),
+                        Text(orderController.errorMessage.value,
+                            style: const TextStyle(
+                                fontSize: 18, color: Colors.black)),
+                      ],
+                    ),
+                  );
+                } else if (orderController.activeOrders.isEmpty) {
+                  // No data state (empty list)
+                  return Center(
+                    child: Text(
+                      'No Orders Yet!',
+                      style: GoogleFonts.inter(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                          color: const Color.fromRGBO(20, 28, 36, 0.5)),
+                    ),
+                  );
+                } else {
+                  // Data state (display list of orders)
+                  return Column(
+                    children: List.generate(
+                        min(orderController.activeOrders.length, 3), (index) {
+                      return CurrentOrderTile(
+                        title: orderController
+                            .activeOrders[index].restaurantName,
+                        place: orderController.activeOrders[index].address,
+                        status:
+                            orderController.activeOrders[index].orderStatus,
+                      );
+                    }),
+                  );
+                }
+              }),
 
               const SizedBox(height: 20),
 
               //View order history Btn
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                child: InkWell(
-                  onTap: () {
-                    Get.toNamed("/orderview");
-                  },
-                  child: Container(
-                    width: double.infinity * 0.6,
-                    height: 39,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(
-                          color: const Color(0xffFC440E),
-                          width: 1,
-                        )),
-                    child: const Center(
-                      child: Text(
-                        "View order history",
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xffFC440E),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  child: HoverButton(
+                    text: "View order history",
+                    onTap: () {
+                      dashBoardController.changeTabIndex(1);
+                    },
+                  )),
 
               const SizedBox(height: 30),
 

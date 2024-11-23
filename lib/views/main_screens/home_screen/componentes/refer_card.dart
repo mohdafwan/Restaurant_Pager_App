@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:restuarant_pager_app/controllers/UserController/UserController.dart';
 import 'package:share_plus/share_plus.dart';
 
 
@@ -82,7 +84,7 @@ class ReferFriendCard extends StatelessWidget {
                   const SizedBox(height: 14),
                   InkWell(
                     onTap: () {
-                      Share.share('Check out my website https://example.com');
+                      Share.share('https://restaurentpager.com/refer?code=${Get.find<UserController>().id}');
                     },
                     child: Container(
                       decoration: BoxDecoration(
