@@ -119,6 +119,7 @@ List<OrderModel> dummyData = [
       OrderModel model = OrderModel.fromJson(data);
       switch (data['type']) {
         case 'new':
+          if(orderMap[model.id] != null) break;
           orderMap[model.id] = model;
           allOrders.insert(0, model);
           activeOrders.insert(0, model);
