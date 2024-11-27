@@ -33,57 +33,57 @@ class OrderHistoryController extends GetxController {
   final String last30Days = "Last 30 days";
   final String last6Months = "Last 6 Months";
 
-  // dummy data
-List<OrderModel> dummyData = [
-  OrderModel(
-    id: 1992,
-    customerName: "test User",
-    billId: 5465132,
-    orderDate: "10-10-24",
-    deliveryData: "6:00 PM",
-    amount: 555,
-    note: "",
-    tag: [],
-    orderStatus: "ongoing",
-    imgUrl: "https://lofrev.net/wp-content/photos/2016/06/KFC_logo_1.png",
-    restaurantName: "KFC",
-    address: "Pacific Mall Delhi",
-    user: 121,
-    restaurant: 1,
-  ),
-  OrderModel(
-    id: 1993,
-    customerName: "John Doe",
-    billId: 987654,
-    orderDate: "15-10-24",
-    deliveryData: "7:00 PM",
-    amount: 700,
-    note: "Extra cheese",
-    tag: [],
-    orderStatus: "order ready",
-    imgUrl: "https://1000logos.net/wp-content/uploads/2017/05/Pizza-Hut-Logo.png",
-    restaurantName: "Pizza Hut",
-    address: "City Center Mall, Mumbai",
-    user: 122,
-    restaurant: 2,
-  ),
-  OrderModel(
-    id: 1994,
-    customerName: "Jane Smith",
-    billId: 123456,
-    orderDate: "20-10-24",
-    deliveryData: "8:00 PM",
-    amount: 850,
-    note: "No onions",
-    tag: [],
-    orderStatus: "completed",
-    imgUrl: "https://logowik.com/content/uploads/images/burger-king-new-20218389.jpg",
-    restaurantName: "Burger King",
-    address: "DLF Cyber Hub, Gurgaon",
-    user: 123,
-    restaurant: 3,
-  ),
-];
+// dummy data
+// List<OrderModel> dummyData = [
+//   OrderModel(
+//     id: 1992,
+//     customerName: "test User",
+//     billId: 5465132,
+//     orderDate: "10-10-24",
+//     deliveryData: "6:00 PM",
+//     amount: 555,
+//     note: "",
+//     tag: [],
+//     orderStatus: "ongoing",
+//     imgUrl: "https://lofrev.net/wp-content/photos/2016/06/KFC_logo_1.png",
+//     restaurantName: "KFC",
+//     address: "Pacific Mall Delhi",
+//     user: 121,
+//     restaurant: 1,
+//   ),
+//   OrderModel(
+//     id: 1993,
+//     customerName: "John Doe",
+//     billId: 987654,
+//     orderDate: "15-10-24",
+//     deliveryData: "7:00 PM",
+//     amount: 700,
+//     note: "Extra cheese",
+//     tag: [],
+//     orderStatus: "order ready",
+//     imgUrl: "https://1000logos.net/wp-content/uploads/2017/05/Pizza-Hut-Logo.png",
+//     restaurantName: "Pizza Hut",
+//     address: "City Center Mall, Mumbai",
+//     user: 122,
+//     restaurant: 2,
+//   ),
+//   OrderModel(
+//     id: 1994,
+//     customerName: "Jane Smith",
+//     billId: 123456,
+//     orderDate: "20-10-24",
+//     deliveryData: "8:00 PM",
+//     amount: 850,
+//     note: "No onions",
+//     tag: [],
+//     orderStatus: "completed",
+//     imgUrl: "https://logowik.com/content/uploads/images/burger-king-new-20218389.jpg",
+//     restaurantName: "Burger King",
+//     address: "DLF Cyber Hub, Gurgaon",
+//     user: 123,
+//     restaurant: 3,
+//   ),
+// ];
 
 
   @override
@@ -121,12 +121,28 @@ List<OrderModel> dummyData = [
         case 'new':
           if(orderMap[model.id] != null) break;
           orderMap[model.id] = model;
-          allOrders.insert(0, model);
-          activeOrders.insert(0, model);
+          allOrders.add(model);
+          activeOrders.add(model);
           break;
 
         case 'updated':
-          orderMap[model.id] = model;
+        if(orderMap[model.id] == null) break;
+          orderMap[model.id]!.copyWith(
+            id: model.id,
+            customerName: model.customerName,
+            billId: model.billId,
+            note: model.note,
+            orderDate: model.orderDate,
+            orderStatus: model.orderStatus,
+            tag: model.tag,
+            deliveryData: model.deliveryData,
+            amount: model.amount,
+            imgUrl: model.imgUrl,
+            restaurantName: model.restaurantName,
+            address: model.address,
+            user: model.user,
+            restaurant: model.restaurant
+          );
           splitOrders();
           break;
       }
@@ -197,7 +213,7 @@ List<OrderModel> dummyData = [
   }
 
   // Simulate fetching order history data
-  void fetchOrderHistory() async {
+  Future<void> fetchOrderHistory() async {
     try {
       isLoading(true);
       hasError(false);
@@ -230,8 +246,7 @@ List<OrderModel> dummyData = [
           orderMap[model.id] = model;
           return model;
         }).toList();
-        allOrders.value = dummyData;
-        filteredOrders.value = allOrders; // initially
+        // allOrders.value = dummyData;
         splitOrders();
       }
       if (allOrders.isEmpty) {
@@ -262,12 +277,14 @@ List<OrderModel> dummyData = [
   void splitOrders(){
     var activeOrderTemp = <OrderModel>[];
     var completedOrderTemp = <OrderModel>[];
-    arrange();
+    // arrange();
     for(OrderModel order in allOrders){
       if(order.orderStatus == completed){
         completedOrderTemp.add(order);
-      }else{
+      }else if(order.orderStatus == going){
         activeOrderTemp.add(order);
+      }else if(order.orderStatus == ready){
+        activeOrderTemp.insert(0, order);
       }
     }
     activeOrders.value = activeOrderTemp;

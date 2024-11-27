@@ -10,7 +10,7 @@ class OrderModel {
   final String orderStatus;
   final String imgUrl;
   final String restaurantName;
-  final String address; 
+  final String address;
   final int user;
   final int restaurant;
 
@@ -26,7 +26,7 @@ class OrderModel {
     required this.orderStatus,
     required this.imgUrl,
     required this.restaurantName,
-    required this.address, 
+    required this.address,
     required this.user,
     required this.restaurant,
   });
@@ -42,7 +42,7 @@ class OrderModel {
       note: json['note'] as String,
       tag: List<String>.from(json['tag'] as List),
       orderStatus: json['order_status'] as String,
-      imgUrl: json["image"] as String? ?? "", 
+      imgUrl: json["image"] as String? ?? "",
       restaurantName: json["resturant_name"] as String? ?? "",
       address: json['address'] as String? ?? "",
       user: json['user'] as int,
@@ -63,9 +63,42 @@ class OrderModel {
       'order_status': orderStatus,
       'img_url': imgUrl,
       'restaurant_name': restaurantName,
-      'address': address, 
+      'address': address,
       'user': user,
       'resturant': restaurant,
     };
+  }
+  OrderModel copyWith({
+    int? id,
+    String? customerName,
+    int? billId,
+    String? orderDate,
+    String? deliveryData,
+    int? amount,
+    String? note,
+    List<String>? tag,
+    String? orderStatus,
+    String? imgUrl,
+    String? restaurantName,
+    String? address,
+    int? user,
+    int? restaurant,
+  }) {
+    return OrderModel(
+      id: id ?? this.id,
+      customerName: customerName ?? this.customerName,
+      billId: billId ?? this.billId,
+      orderDate: orderDate ?? this.orderDate,
+      deliveryData: deliveryData ?? this.deliveryData,
+      amount: amount ?? this.amount,
+      note: note ?? this.note,
+      tag: tag ?? this.tag,
+      orderStatus: orderStatus ?? this.orderStatus,
+      imgUrl: imgUrl ?? this.imgUrl,
+      restaurantName: restaurantName ?? this.restaurantName,
+      address: address ?? this.address,
+      user: user ?? this.user,
+      restaurant: restaurant ?? this.restaurant,
+    );
   }
 }

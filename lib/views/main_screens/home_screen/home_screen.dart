@@ -122,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       return CurrentOrderTile(
                         title: orderController
                             .activeOrders[index].restaurantName,
-                        place: orderController.activeOrders[index].address,
+                        place: orderController.activeOrders[index].address.replaceFirst(',', ',\n'),
                         status:
                             orderController.activeOrders[index].orderStatus,
                       );
@@ -213,6 +213,8 @@ class CurrentOrderTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final orderController = Get.put(OrderHistoryController());
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 10),
       child: Container(
@@ -256,10 +258,12 @@ class CurrentOrderTile extends StatelessWidget {
                       ),
                       Text(
                         place,
+                        softWrap: true,
                         style: const TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.w400,
-                            color: Color(0xff1E1E1E)),
+                          color: Color(0xff1E1E1E),
+                        ),
                       )
                     ],
                   )
@@ -267,7 +271,7 @@ class CurrentOrderTile extends StatelessWidget {
               ),
               Container(
                 decoration: BoxDecoration(
-                    color: (status == "Preparing")
+                    color: (status == orderController.going)
                         ? const Color(0xffFED7B3)
                         : const Color(0xffE6F5EE),
                     borderRadius: BorderRadius.circular(8)),
@@ -275,11 +279,12 @@ class CurrentOrderTile extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   child: Text(
-                    status,
+                    status == orderController.going ? "Preparing" : status,
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w700,
-                      color: (status == "Preparing")
+                      overflow: TextOverflow.fade,
+                      color: (status == orderController.going)
                           ? const Color(0xffFC440E)
                           : const Color(0xff069855),
                     ),

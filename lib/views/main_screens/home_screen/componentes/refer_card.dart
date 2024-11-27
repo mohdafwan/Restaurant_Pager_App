@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:restuarant_pager_app/controllers/UserController/UserController.dart';
 import 'package:share_plus/share_plus.dart';
@@ -107,13 +108,11 @@ class ReferFriendCard extends StatelessWidget {
                   ),
                 ],
               ),
-              const Padding(
-                padding: EdgeInsets.only(right: 12.0),
-                child: Image(
-                  image: AssetImage(
-                    "assets/homeImages/referfriendimage.png",
+              Padding(
+                padding: const EdgeInsets.only(right: 12.0),
+                child: SvgPicture.asset(
+                    "assets/homeImages/referfriendimage.svg",
                   ),
-                ),
               ),
             ],
           ),
